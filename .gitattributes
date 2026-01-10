@@ -1,0 +1,17 @@
+# Normalize line endings
+* text=auto
+
+# Explicit text files
+*.py text
+*.txt text
+*.md text
+*.sh text eol=lf
+*.service text eol=lf
+
+# Binary files
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.db binary
