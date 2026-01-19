@@ -18,6 +18,7 @@ from shared.constants import (
     MAX_JAIL_TURNS, JAIL_BAIL, SALARY_AMOUNT, BOARD_SPACES
 )
 from shared.enums import SpaceType, PlayerState, GamePhase, CardType
+from shared.pokemon import generate_pokemon_assignments
 
 from .board import Board
 from .player import Player
@@ -198,6 +199,14 @@ class Game:
         # Randomize player order
         import random
         random.shuffle(self.player_order)
+        
+        # Generate and assign random Pokemon to properties
+        try:
+            pokemon_assignments = generate_pokemon_assignments()
+            self.board.assign_pokemon(pokemon_assignments)
+            logger.info(f"Assigned Pokemon to {len(pokemon_assignments)} properties")
+        except Exception as e:
+            logger.warning(f"Failed to assign Pokemon: {e}. Game will continue without Pokemon theming.")
         
         self.phase = GamePhase.PRE_ROLL
         self.turn_number = 1

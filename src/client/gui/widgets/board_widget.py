@@ -2,19 +2,20 @@
 Board visualization widget.
 
 Draws the Monopoly board with properties, players, and buildings.
-Uses placeholder graphics - designed to be easily replaced with images.
+Pokemon-themed properties display Pokemon images with evolution chains.
 """
 
 from typing import Optional
 from PyQt6.QtWidgets import QWidget, QToolTip
 from PyQt6.QtCore import Qt, QRect, QPoint, pyqtSignal
-from PyQt6.QtGui import QPainter, QColor, QFont, QPen, QBrush, QFontMetrics
+from PyQt6.QtGui import QPainter, QColor, QFont, QPen, QBrush, QFontMetrics, QPixmap
 
 from shared.constants import BOARD_SIZE, BOARD_SPACES
 from client.gui.styles import (
     PROPERTY_COLORS, PLAYER_COLORS, SPACE_COLORS,
     BACKGROUND_COLOR, BOARD_EDGE_COLOR, MORTGAGED_OVERLAY
 )
+from client.gui.pokemon_image_cache import get_image_cache
 
 
 class BoardWidget(QWidget):
@@ -120,15 +121,20 @@ class BoardWidget(QWidget):
             BACKGROUND_COLOR
         )
         
-        # Draw "MONOPOLY" in center
+        # Draw "POKEMON" in center with subtitle
         painter.setPen(QPen(BOARD_EDGE_COLOR))
         font = QFont("Arial", 24, QFont.Weight.Bold)
         painter.setFont(font)
-        painter.drawText(
-            QRect(margin, margin, board_size, board_size),
-            Qt.AlignmentFlag.AlignCenter,
-            "MONOPOLY"
-        )
+        
+        # Main title
+        title_rect = QRect(margin, margin + board_size // 3, board_size, board_size // 4)
+        painter.drawText(title_rect, Qt.AlignmentFlag.AlignCenter, "POKÉMON")
+        
+        # Subtitle
+        font.setPointSize(12)
+        painter.setFont(font)
+        subtitle_rect = QRect(margin, margin + board_size // 2, board_size, board_size // 6)
+        painter.drawText(subtitle_rect, Qt.AlignmentFlag.AlignCenter, "MONOPOLY")
         
         # Draw all spaces
         for pos in range(BOARD_SIZE):
@@ -148,11 +154,18 @@ class BoardWidget(QWidget):
         space_type = space_data.get("type", "")
         space_name = space_data.get("name", f"Space {position}")
         space_group = space_data.get("group")
+        space_cost = space_data.get("cost")
         
         # Get property data if we have game state
         prop_data = None
+        pokemon_data = None
         if self._game_state:
             prop_data = self._game_state.get("board", {}).get(str(position))
+            if prop_data:
+                pokemon_data = prop_data.get("pokemon")
+                # Use Pokemon name if available
+                if pokemon_data and pokemon_data.get("name"):
+                    space_name = pokemon_data["name"]
         
         # Background color - properties get WHITE background, special spaces get their color
         # The property COLOR is shown only in the color bar, not the whole space
@@ -171,26 +184,30 @@ class BoardWidget(QWidget):
         painter.setPen(QPen(Qt.GlobalColor.black, 1))
         painter.drawRect(rect)
         
-        # Draw color bar for color-group properties (not railroads/utilities)
-        if space_group and space_group in PROPERTY_COLORS and space_type == "PROPERTY":
-            bar_height = rect.height() // 5
-            is_vertical = position in range(11, 20) or position in range(31, 40)
-            
-            if is_vertical:
-                if position in range(11, 20):  # Left side
-                    bar_rect = QRect(rect.right() - bar_height, rect.top(), bar_height, rect.height())
-                else:  # Right side
-                    bar_rect = QRect(rect.left(), rect.top(), bar_height, rect.height())
-            else:
-                if position in range(1, 10):  # Bottom
-                    bar_rect = QRect(rect.left(), rect.top(), rect.width(), bar_height)
-                else:  # Top
-                    bar_rect = QRect(rect.left(), rect.bottom() - bar_height, rect.width(), bar_height)
-            
-            painter.fillRect(bar_rect, PROPERTY_COLORS[space_group])
-            painter.drawRect(bar_rect)
+        # For Pokemon-themed properties, use new layout:
+        # Top 15%: color bar, Middle 70%: image + name, Bottom 15%: price
+        is_vertical = position in range(11, 20) or position in range(31, 40)
         
-        # Draw mortgaged overlay
+        if space_type == "PROPERTY" and space_group and space_group in PROPERTY_COLORS:
+            if pokemon_data:
+                self._draw_pokemon_property(
+                    painter, rect, position, space_group, 
+                    pokemon_data, space_cost, is_vertical, prop_data
+                )
+            else:
+                # Fallback to old style if no Pokemon data
+                self._draw_classic_property(
+                    painter, rect, position, space_group, 
+                    space_name, space_cost, is_vertical, prop_data
+                )
+        else:
+            # Non-property spaces (railroads, utilities, special spaces)
+            self._draw_non_property_space(
+                painter, rect, position, space_type, 
+                space_name, space_cost, is_vertical, prop_data
+            )
+        
+        # Draw mortgaged overlay (on top of everything)
         if prop_data and prop_data.get("is_mortgaged"):
             painter.fillRect(rect, MORTGAGED_OVERLAY)
             painter.setPen(QPen(Qt.GlobalColor.red, 2))
@@ -228,30 +245,217 @@ class BoardWidget(QWidget):
                         painter.restore()
                         break
         
-        # Draw space name (abbreviated)
+        # Highlight hovered space
+        if self._hovered_space == position:
+            painter.fillRect(rect, QColor(255, 255, 0, 50))
+        
+        # Restore painter state at end of drawing this space
+        painter.restore()
+    
+    def _draw_pokemon_property(
+        self,
+        painter: QPainter,
+        rect: QRect,
+        position: int,
+        group: str,
+        pokemon_data: dict,
+        cost: Optional[int],
+        is_vertical: bool,
+        prop_data: Optional[dict]
+    ) -> None:
+        """Draw a Pokemon-themed property space."""
+        pokemon_name = pokemon_data.get("name", "???")
+        image_url = pokemon_data.get("image_url", "")
+        
+        # Calculate regions: 15% color bar, 70% image area, 15% price
+        if is_vertical:
+            # Vertical spaces (left and right edges)
+            bar_size = max(rect.width() // 7, 6)
+            price_size = max(rect.width() // 7, 6)
+            image_size = rect.width() - bar_size - price_size
+            
+            if position in range(11, 20):  # Left side
+                # Color bar on right edge
+                bar_rect = QRect(rect.right() - bar_size, rect.top(), bar_size, rect.height())
+                # Price on left edge
+                price_rect = QRect(rect.left(), rect.top(), price_size, rect.height())
+                # Image in middle
+                image_rect = QRect(rect.left() + price_size, rect.top(), image_size, rect.height())
+            else:  # Right side
+                # Color bar on left edge
+                bar_rect = QRect(rect.left(), rect.top(), bar_size, rect.height())
+                # Price on right edge
+                price_rect = QRect(rect.right() - price_size, rect.top(), price_size, rect.height())
+                # Image in middle
+                image_rect = QRect(rect.left() + bar_size, rect.top(), image_size, rect.height())
+        else:
+            # Horizontal spaces (top and bottom edges)
+            bar_size = max(rect.height() // 7, 6)
+            price_size = max(rect.height() // 7, 6)
+            image_size = rect.height() - bar_size - price_size
+            
+            if position in range(1, 10):  # Bottom edge
+                # Color bar on top
+                bar_rect = QRect(rect.left(), rect.top(), rect.width(), bar_size)
+                # Price on bottom
+                price_rect = QRect(rect.left(), rect.bottom() - price_size, rect.width(), price_size)
+                # Image in middle
+                image_rect = QRect(rect.left(), rect.top() + bar_size, rect.width(), image_size)
+            else:  # Top edge
+                # Color bar on bottom
+                bar_rect = QRect(rect.left(), rect.bottom() - bar_size, rect.width(), bar_size)
+                # Price on top
+                price_rect = QRect(rect.left(), rect.top(), rect.width(), price_size)
+                # Image in middle
+                image_rect = QRect(rect.left(), rect.top() + price_size, rect.width(), image_size)
+        
+        # Draw color bar
+        painter.fillRect(bar_rect, PROPERTY_COLORS[group])
+        painter.setPen(QPen(Qt.GlobalColor.black, 1))
+        painter.drawRect(bar_rect)
+        
+        # Draw Pokemon image
+        self._draw_pokemon_image(painter, image_rect, image_url, pokemon_name, is_vertical)
+        
+        # Draw price
+        if cost:
+            self._draw_price(painter, price_rect, cost, is_vertical)
+    
+    def _draw_pokemon_image(
+        self,
+        painter: QPainter,
+        rect: QRect,
+        image_url: str,
+        pokemon_name: str,
+        is_vertical: bool
+    ) -> None:
+        """Draw a Pokemon image with name underneath."""
+        # Try to get the cached image
+        cache = get_image_cache()
+        
+        # Calculate image dimensions (leave room for name)
+        name_height = 10
+        if is_vertical:
+            img_width = rect.width() - 4
+            img_height = rect.height() - name_height - 4
+        else:
+            img_width = rect.width() - 4
+            img_height = rect.height() - name_height - 4
+        
+        pixmap = cache.get_pixmap(image_url, img_width, img_height) if image_url else None
+        
+        if pixmap and not pixmap.isNull():
+            # Center the image in the available space
+            img_x = rect.left() + (rect.width() - pixmap.width()) // 2
+            img_y = rect.top() + 2
+            painter.drawPixmap(img_x, img_y, pixmap)
+        
+        # Draw Pokemon name at the bottom of the image area
+        painter.setPen(QPen(Qt.GlobalColor.black))
+        font = QFont("Arial", 5)
+        font.setBold(True)
+        painter.setFont(font)
+        
+        # Truncate name if too long
+        fm = QFontMetrics(font)
+        display_name = pokemon_name
+        max_width = rect.width() - 4 if not is_vertical else rect.height() - 4
+        if fm.horizontalAdvance(display_name) > max_width:
+            while fm.horizontalAdvance(display_name + "..") > max_width and len(display_name) > 1:
+                display_name = display_name[:-1]
+            display_name += ".."
+        
+        name_rect = QRect(
+            rect.left(), 
+            rect.bottom() - name_height,
+            rect.width(),
+            name_height
+        )
+        
+        painter.save()
+        if is_vertical:
+            # Rotate text for vertical spaces
+            painter.translate(rect.center())
+            painter.rotate(90 if rect.left() < rect.right() else -90)
+            painter.drawText(
+                QRect(-rect.height()//2, -rect.width()//2 + rect.width() - name_height,
+                      rect.height(), name_height),
+                Qt.AlignmentFlag.AlignCenter,
+                display_name
+            )
+        else:
+            painter.drawText(name_rect, Qt.AlignmentFlag.AlignCenter, display_name)
+        painter.restore()
+    
+    def _draw_price(
+        self,
+        painter: QPainter,
+        rect: QRect,
+        cost: int,
+        is_vertical: bool
+    ) -> None:
+        """Draw the property price."""
+        painter.setPen(QPen(Qt.GlobalColor.black))
+        font = QFont("Arial", 5)
+        painter.setFont(font)
+        
+        price_text = f"${cost}"
+        
+        painter.save()
+        if is_vertical:
+            painter.translate(rect.center())
+            painter.rotate(90 if rect.x() < rect.center().x() else -90)
+            painter.drawText(
+                QRect(-rect.height()//2, -rect.width()//2, rect.height(), rect.width()),
+                Qt.AlignmentFlag.AlignCenter,
+                price_text
+            )
+        else:
+            painter.drawText(rect, Qt.AlignmentFlag.AlignCenter, price_text)
+        painter.restore()
+    
+    def _draw_classic_property(
+        self,
+        painter: QPainter,
+        rect: QRect,
+        position: int,
+        group: str,
+        name: str,
+        cost: Optional[int],
+        is_vertical: bool,
+        prop_data: Optional[dict]
+    ) -> None:
+        """Draw a classic (non-Pokemon) property space as fallback."""
+        # Draw color bar
+        bar_height = rect.height() // 5 if not is_vertical else rect.width() // 5
+        
+        if is_vertical:
+            if position in range(11, 20):  # Left side
+                bar_rect = QRect(rect.right() - bar_height, rect.top(), bar_height, rect.height())
+            else:  # Right side
+                bar_rect = QRect(rect.left(), rect.top(), bar_height, rect.height())
+        else:
+            if position in range(1, 10):  # Bottom
+                bar_rect = QRect(rect.left(), rect.top(), rect.width(), bar_height)
+            else:  # Top
+                bar_rect = QRect(rect.left(), rect.bottom() - bar_height, rect.width(), bar_height)
+        
+        painter.fillRect(bar_rect, PROPERTY_COLORS[group])
+        painter.drawRect(bar_rect)
+        
+        # Draw name
         painter.setPen(QPen(Qt.GlobalColor.black))
         font = QFont("Arial", 6)
         painter.setFont(font)
         
-        # Abbreviate name to fit
-        fm = QFontMetrics(font)
-        short_name = space_name
+        short_name = name
         if len(short_name) > 12:
             short_name = short_name[:10] + ".."
         
-        # Rotate text for side spaces
         painter.save()
-        if position in range(11, 20):  # Left side - rotate 90°
+        if is_vertical:
             painter.translate(rect.center())
-            painter.rotate(90)
-            painter.drawText(
-                QRect(-rect.height()//2, -rect.width()//2, rect.height(), rect.width()),
-                Qt.AlignmentFlag.AlignCenter,
-                short_name
-            )
-        elif position in range(31, 40):  # Right side - rotate -90°
-            painter.translate(rect.center())
-            painter.rotate(-90)
+            painter.rotate(90 if position in range(11, 20) else -90)
             painter.drawText(
                 QRect(-rect.height()//2, -rect.width()//2, rect.height(), rect.width()),
                 Qt.AlignmentFlag.AlignCenter,
@@ -260,12 +464,39 @@ class BoardWidget(QWidget):
         else:
             painter.drawText(rect, Qt.AlignmentFlag.AlignCenter, short_name)
         painter.restore()
+    
+    def _draw_non_property_space(
+        self,
+        painter: QPainter,
+        rect: QRect,
+        position: int,
+        space_type: str,
+        name: str,
+        cost: Optional[int],
+        is_vertical: bool,
+        prop_data: Optional[dict]
+    ) -> None:
+        """Draw non-property spaces (railroads, utilities, special spaces)."""
+        # Draw name
+        painter.setPen(QPen(Qt.GlobalColor.black))
+        font = QFont("Arial", 6)
+        painter.setFont(font)
         
-        # Highlight hovered space
-        if self._hovered_space == position:
-            painter.fillRect(rect, QColor(255, 255, 0, 50))
+        short_name = name
+        if len(short_name) > 12:
+            short_name = short_name[:10] + ".."
         
-        # Restore painter state at end of drawing this space
+        painter.save()
+        if is_vertical:
+            painter.translate(rect.center())
+            painter.rotate(90 if position in range(11, 20) else -90)
+            painter.drawText(
+                QRect(-rect.height()//2, -rect.width()//2, rect.height(), rect.width()),
+                Qt.AlignmentFlag.AlignCenter,
+                short_name
+            )
+        else:
+            painter.drawText(rect, Qt.AlignmentFlag.AlignCenter, short_name)
         painter.restore()
     
     def _draw_buildings(
@@ -371,13 +602,24 @@ class BoardWidget(QWidget):
                 cost = space_data.get("cost")
                 
                 tooltip = name
-                if cost:
-                    tooltip += f"\nCost: ${cost}"
                 
                 # Add property info from game state
                 if self._game_state:
                     prop_data = self._game_state.get("board", {}).get(str(pos))
                     if prop_data:
+                        # Show Pokemon info if available
+                        pokemon_data = prop_data.get("pokemon")
+                        if pokemon_data:
+                            pokemon_name = pokemon_data.get("name", "")
+                            pokemon_types = pokemon_data.get("types", [])
+                            if pokemon_name:
+                                tooltip = f"🔮 {pokemon_name}"
+                            if pokemon_types:
+                                tooltip += f"\nType: {'/'.join(pokemon_types)}"
+                        
+                        if cost:
+                            tooltip += f"\nCost: ${cost}"
+                        
                         if prop_data.get("owner_id"):
                             # Find owner name
                             for p in self._game_state.get("players", []):
@@ -390,6 +632,8 @@ class BoardWidget(QWidget):
                             tooltip += "\nHas Hotel"
                         if prop_data.get("is_mortgaged"):
                             tooltip += "\n(MORTGAGED)"
+                elif cost:
+                    tooltip += f"\nCost: ${cost}"
                 
                 QToolTip.showText(event.globalPosition().toPoint(), tooltip, self)
             else:

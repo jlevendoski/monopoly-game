@@ -16,6 +16,32 @@ from shared.enums import SpaceType, PropertyGroup
 
 
 @dataclass
+class PokemonData:
+    """Pokemon data associated with a property."""
+    dex_number: str
+    name: str
+    types: List[str]
+    image_url: str
+    
+    def to_dict(self) -> dict:
+        return {
+            "dex_number": self.dex_number,
+            "name": self.name,
+            "types": self.types,
+            "image_url": self.image_url,
+        }
+    
+    @classmethod
+    def from_dict(cls, data: dict) -> "PokemonData":
+        return cls(
+            dex_number=data.get("dex_number", ""),
+            name=data.get("name", ""),
+            types=data.get("types", []),
+            image_url=data.get("image_url", ""),
+        )
+
+
+@dataclass
 class Property:
     """Represents a purchasable property on the board."""
     
@@ -32,6 +58,9 @@ class Property:
     houses: int = 0
     has_hotel: bool = False
     is_mortgaged: bool = False
+    
+    # Pokemon theming (None for railroads/utilities)
+    pokemon: PokemonData | None = None
     
     @property
     def is_owned(self) -> bool:
@@ -195,7 +224,7 @@ class Property:
     
     def to_dict(self) -> dict:
         """Convert to dictionary for serialization."""
-        return {
+        result = {
             "position": self.position,
             "name": self.name,
             "space_type": self.space_type.value,
@@ -206,6 +235,9 @@ class Property:
             "has_hotel": self.has_hotel,
             "is_mortgaged": self.is_mortgaged,
         }
+        if self.pokemon:
+            result["pokemon"] = self.pokemon.to_dict()
+        return result
 
 
 @dataclass
@@ -216,6 +248,7 @@ class Board:
     """
     
     properties: Dict[int, Property] = field(default_factory=dict)
+    pokemon_assignments: Dict[int, dict] = field(default_factory=dict)
     
     def __post_init__(self):
         """Initialize board with all properties."""
@@ -234,6 +267,21 @@ class Board:
                     rents=space_data["rents"],
                     house_cost=space_data["house_cost"],
                 )
+    
+    def assign_pokemon(self, assignments: Dict[int, dict]) -> None:
+        """
+        Assign Pokemon to properties.
+        
+        Args:
+            assignments: Dictionary mapping board position to Pokemon data dict
+        """
+        self.pokemon_assignments = assignments
+        for position, pokemon_data in assignments.items():
+            if position in self.properties:
+                prop = self.properties[position]
+                prop.pokemon = PokemonData.from_dict(pokemon_data)
+                # Update property name to Pokemon name
+                prop.name = pokemon_data.get("name", prop.name)
     
     def get_space(self, position: int) -> dict:
         """
@@ -425,13 +473,23 @@ class Board:
             "properties": {
                 pos: prop.to_dict() 
                 for pos, prop in self.properties.items()
-            }
+            },
+            "pokemon_assignments": self.pokemon_assignments,
         }
     
     @classmethod
     def from_dict(cls, data: dict) -> "Board":
         """Create board from dictionary."""
         board = cls()
+        
+        # First, restore Pokemon assignments if present
+        pokemon_assignments = data.get("pokemon_assignments", {})
+        if pokemon_assignments:
+            # Convert string keys back to int
+            pokemon_assignments = {int(k): v for k, v in pokemon_assignments.items()}
+            board.assign_pokemon(pokemon_assignments)
+        
+        # Then restore property state
         for pos_str, prop_data in data.get("properties", {}).items():
             pos = int(pos_str)
             if pos in board.properties:
@@ -440,4 +498,10 @@ class Board:
                 prop.houses = prop_data.get("houses", 0)
                 prop.has_hotel = prop_data.get("has_hotel", False)
                 prop.is_mortgaged = prop_data.get("is_mortgaged", False)
+                
+                # Restore Pokemon data if present
+                if "pokemon" in prop_data:
+                    prop.pokemon = PokemonData.from_dict(prop_data["pokemon"])
+                    prop.name = prop_data["pokemon"].get("name", prop.name)
+        
         return board

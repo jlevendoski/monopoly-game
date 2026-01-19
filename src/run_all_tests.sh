@@ -67,15 +67,27 @@ TEST_TYPE="${1:-all}"
 case "$TEST_TYPE" in
     unit)
         echo -e "${YELLOW}Running unit tests only...${NC}"
-        run_test "Game Engine Tests" "$PYTHON tests/test_game_engine/test_game_engine.py"
-        run_test "Network Tests" "$PYTHON tests/test_network/test_network.py"
-        run_test "Persistence Tests" "$PYTHON tests/test_persistence/test_persistence.py"
+        # Alphabetized test list
+        run_test "Bankruptcy Mechanics" "$PYTHON tests/test_game_engine/test_bankruptcy.py"
+        run_test "Building Mechanics" "$PYTHON tests/test_game_engine/test_building.py"
+        run_test "Card Actions" "$PYTHON tests/test_game_engine/test_cards.py"
+        run_test "Game Engine Core" "$PYTHON tests/test_game_engine/test_game_engine.py"
+        run_test "Game Flow Integration" "$PYTHON tests/test_game_engine/test_game_flow.py"
+        run_test "Input Validation" "$PYTHON tests/test_game_engine/test_input_validation.py"
+        run_test "Jail Mechanics" "$PYTHON tests/test_game_engine/test_jail.py"
+        run_test "Network Layer" "$PYTHON tests/test_network/test_network.py"
+        run_test "Persistence Layer" "$PYTHON tests/test_persistence/test_persistence.py"
+        run_test "Rent Calculations" "$PYTHON tests/test_game_engine/test_rent.py"
+        run_test "Rent Verification" "$PYTHON tests/test_game_engine/test_rent_verification.py"
+        run_test "Trading Validation" "$PYTHON tests/test_game_engine/test_trading.py"
+        run_test "Turn Management" "$PYTHON tests/test_game_engine/test_turn_management.py"
         ;;
     
     integration)
         echo -e "${YELLOW}Running integration tests only...${NC}"
+        # Alphabetized test list
+        run_test "Reconnection" "$PYTHON tests/test_integration/test_reconnection.py"
         run_test "Two-Player Integration" "$PYTHON tests/test_integration/test_two_player_integration.py"
-        run_test "Reconnection Tests" "$PYTHON tests/test_integration/test_reconnection.py"
         ;;
     
     e2e)
@@ -130,17 +142,28 @@ case "$TEST_TYPE" in
     all)
         echo -e "${YELLOW}Running complete test suite...${NC}"
         
-        # Unit tests
+        # Unit tests (alphabetized)
         echo ""
         echo -e "${CYAN}=== UNIT TESTS ===${NC}"
-        run_test "Game Engine Tests" "$PYTHON tests/test_game_engine/test_game_engine.py"
-        run_test "Network Tests" "$PYTHON tests/test_network/test_network.py"
+        run_test "Bankruptcy Mechanics" "$PYTHON tests/test_game_engine/test_bankruptcy.py"
+        run_test "Building Mechanics" "$PYTHON tests/test_game_engine/test_building.py"
+        run_test "Card Actions" "$PYTHON tests/test_game_engine/test_cards.py"
+        run_test "Game Engine Core" "$PYTHON tests/test_game_engine/test_game_engine.py"
+        run_test "Game Flow Integration" "$PYTHON tests/test_game_engine/test_game_flow.py"
+        run_test "Input Validation" "$PYTHON tests/test_game_engine/test_input_validation.py"
+        run_test "Jail Mechanics" "$PYTHON tests/test_game_engine/test_jail.py"
+        run_test "Network Layer" "$PYTHON tests/test_network/test_network.py"
+        run_test "Persistence Layer" "$PYTHON tests/test_persistence/test_persistence.py"
+        run_test "Rent Calculations" "$PYTHON tests/test_game_engine/test_rent.py"
+        run_test "Rent Verification" "$PYTHON tests/test_game_engine/test_rent_verification.py"
+        run_test "Trading Validation" "$PYTHON tests/test_game_engine/test_trading.py"
+        run_test "Turn Management" "$PYTHON tests/test_game_engine/test_turn_management.py"
         
-        # Integration tests
+        # Integration tests (alphabetized)
         echo ""
         echo -e "${CYAN}=== INTEGRATION TESTS ===${NC}"
+        run_test "Reconnection" "$PYTHON tests/test_integration/test_reconnection.py"
         run_test "Two-Player Integration" "$PYTHON tests/test_integration/test_two_player_integration.py"
-        run_test "Reconnection Tests" "$PYTHON tests/test_integration/test_reconnection.py"
         
         # E2E tests
         echo ""
@@ -161,11 +184,22 @@ esac
 # Summary
 echo ""
 echo -e "${BOLD}${CYAN}╔══════════════════════════════════════════════════════════════════════╗${NC}"
-echo -e "${BOLD}${CYAN}║                         TEST SUMMARY                                 ║${NC}"
+echo -e "${BOLD}${CYAN}║                    TEST SUMMARY (Alphabetized)                       ║${NC}"
 echo -e "${BOLD}${CYAN}╚══════════════════════════════════════════════════════════════════════╝${NC}"
 echo ""
 
-echo -e "$RESULTS"
+# Sort results alphabetically by test name, with PASSED before FAILED
+# First show passed tests (sorted), then failed tests (sorted)
+echo -e "$RESULTS" | grep "PASSED" | sort -t':' -k1 | while read line; do
+    if [ -n "$line" ]; then
+        echo -e "$line"
+    fi
+done
+echo -e "$RESULTS" | grep "FAILED" | sort -t':' -k1 | while read line; do
+    if [ -n "$line" ]; then
+        echo -e "$line"
+    fi
+done
 echo ""
 echo -e "  ${BOLD}Total Passed: ${GREEN}$TOTAL_PASSED${NC}"
 echo -e "  ${BOLD}Total Failed: ${RED}$TOTAL_FAILED${NC}"
