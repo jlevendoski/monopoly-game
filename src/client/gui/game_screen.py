@@ -40,19 +40,20 @@ class GameScreen(QWidget):
     def _setup_ui(self) -> None:
         """Set up the UI layout."""
         layout = QHBoxLayout(self)
-        layout.setContentsMargins(10, 10, 10, 10)
-        layout.setSpacing(10)
+        layout.setContentsMargins(8, 8, 8, 8)
+        layout.setSpacing(8)
         
         # Main splitter
         splitter = QSplitter(Qt.Orientation.Horizontal)
         
-        # Left panel - Players
+        # Left panel - Players (narrower)
         left_panel = QWidget()
         left_layout = QVBoxLayout(left_panel)
         left_layout.setContentsMargins(0, 0, 0, 0)
+        left_layout.setSpacing(8)
         
         self._player_panel = PlayerPanel()
-        left_layout.addWidget(self._player_panel)
+        left_layout.addWidget(self._player_panel, 1)
         
         # Leave game button
         leave_btn = QPushButton("Leave Game")
@@ -60,23 +61,26 @@ class GameScreen(QWidget):
         leave_btn.clicked.connect(self._on_leave_game)
         left_layout.addWidget(leave_btn)
         
-        left_panel.setMaximumWidth(280)
+        left_panel.setMinimumWidth(200)
+        left_panel.setMaximumWidth(240)
         splitter.addWidget(left_panel)
         
-        # Center - Board
+        # Center - Board (gets more space)
         center_panel = QWidget()
         center_layout = QVBoxLayout(center_panel)
         center_layout.setContentsMargins(0, 0, 0, 0)
         
         self._board = BoardWidget()
+        self._board.setMinimumSize(550, 550)  # Ensure board has enough room
         center_layout.addWidget(self._board, 1)
         
         splitter.addWidget(center_panel)
         
-        # Right panel - Actions and Log
+        # Right panel - Actions and Log (slightly narrower)
         right_panel = QWidget()
         right_layout = QVBoxLayout(right_panel)
         right_layout.setContentsMargins(0, 0, 0, 0)
+        right_layout.setSpacing(8)
         
         self._action_panel = ActionPanel()
         right_layout.addWidget(self._action_panel)
@@ -84,13 +88,17 @@ class GameScreen(QWidget):
         self._event_log = EventLog()
         right_layout.addWidget(self._event_log, 1)
         
-        right_panel.setMaximumWidth(320)
+        right_panel.setMinimumWidth(250)
+        right_panel.setMaximumWidth(300)
         splitter.addWidget(right_panel)
         
-        # Set stretch factors
+        # Set stretch factors - center panel stretches to fill
         splitter.setStretchFactor(0, 0)  # Left panel - fixed
         splitter.setStretchFactor(1, 1)  # Center - stretches
         splitter.setStretchFactor(2, 0)  # Right panel - fixed
+        
+        # Set initial sizes (left, center, right)
+        splitter.setSizes([220, 600, 280])
         
         layout.addWidget(splitter)
     

@@ -27,8 +27,7 @@ src/
 │   ├── enums.py         # Enumerations
 │   └── protocol.py      # Message definitions
 │
-├── tests/               # Test suites
-│
+├── run_tests.py         # Single-file test suite (drop-in)
 └── requirements*.txt    # Dependencies
 ```
 
@@ -45,10 +44,24 @@ python -m server.main
 
 # Client  
 python -m client.main
-
-# Tests
-python -m pytest tests/ -v
 ```
+
+## Running Tests
+
+The test suite is a single drop-in file `run_tests.py`:
+
+```bash
+# Run all tests (~2s)
+python run_tests.py
+
+# Quick mode - unit tests only (~0.2s)
+python run_tests.py --quick
+
+# Quiet mode (summary only)
+python run_tests.py -q
+```
+
+The test file can be stored separately and dropped in when needed.
 
 ## CLI Options
 
@@ -62,4 +75,39 @@ python -m server.main --host 0.0.0.0 --port 8765 --log-level DEBUG
 ```bash
 python -m client.main --help
 python -m client.main --server 192.168.1.100 --port 8765
+```
+
+## Building Standalone Executable
+
+To create a distributable .exe (Windows), .app (macOS), or binary (Linux):
+
+### Prerequisites
+```bash
+pip install pyinstaller
+```
+
+### Build Commands
+```bash
+# Using the build script (recommended)
+python build_app.py              # Build with defaults
+python build_app.py --clean      # Clean first, then build
+python build_app.py --debug      # Include console window for debugging
+
+# Or using PyInstaller directly with the spec file
+pyinstaller Monopoly.spec
+
+# Or manual PyInstaller command
+pyinstaller --onefile --windowed --name Monopoly client/main.py
+```
+
+### Output
+- **Windows:** `dist/Monopoly.exe`
+- **macOS:** `dist/Monopoly.app`
+- **Linux:** `dist/Monopoly`
+
+### Configuration Defaults
+Edit `client/config.py` to change default server host/port before building:
+```python
+server_host: str = "your.server.com"  # Line 14
+server_port: int = 8765                # Line 15
 ```

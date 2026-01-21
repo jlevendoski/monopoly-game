@@ -1,3 +1,0 @@
-"""
-GUI test module.
-"""

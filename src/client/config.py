@@ -6,13 +6,18 @@ import os
 from dataclasses import dataclass
 
 
+# Default server configuration - change this before building for distribution
+DEFAULT_SERVER_HOST = "146.190.173.143"  # Replace with your actual server IP
+DEFAULT_SERVER_PORT = 8765
+
+
 @dataclass
 class ClientSettings:
     """Client configuration."""
     
     # Server connection
-    server_host: str = "localhost"
-    server_port: int = 8765
+    server_host: str = DEFAULT_SERVER_HOST
+    server_port: int = DEFAULT_SERVER_PORT
     
     # Reconnection settings
     reconnect_attempts: int = 5
@@ -30,8 +35,8 @@ class ClientSettings:
 def load_settings() -> ClientSettings:
     """Load settings from environment variables."""
     return ClientSettings(
-        server_host=os.getenv("MONOPOLY_SERVER_HOST", "localhost"),
-        server_port=int(os.getenv("MONOPOLY_SERVER_PORT", "8765")),
+        server_host=os.getenv("MONOPOLY_SERVER_HOST", DEFAULT_SERVER_HOST),
+        server_port=int(os.getenv("MONOPOLY_SERVER_PORT", str(DEFAULT_SERVER_PORT))),
         reconnect_attempts=int(os.getenv("MONOPOLY_RECONNECT_ATTEMPTS", "5")),
         reconnect_delay=float(os.getenv("MONOPOLY_RECONNECT_DELAY", "2.0")),
         window_width=int(os.getenv("MONOPOLY_WINDOW_WIDTH", "1280")),

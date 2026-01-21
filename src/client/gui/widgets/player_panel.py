@@ -16,58 +16,63 @@ from client.gui.styles import PLAYER_COLORS, PROPERTY_COLORS
 from shared.constants import BOARD_SPACES
 
 
-class PlayerCard(QFrame):
+class PlayerCard(QWidget):
     """Card showing a single player's information."""
     
     def __init__(self, parent=None):
         super().__init__(parent)
         
-        self.setFrameStyle(QFrame.Shape.Box | QFrame.Shadow.Raised)
-        self.setLineWidth(2)
-        
         layout = QVBoxLayout(self)
-        layout.setSpacing(4)
+        layout.setSpacing(2)
+        layout.setContentsMargins(4, 4, 4, 4)
         
         # Name and status row
         name_row = QHBoxLayout()
+        name_row.setSpacing(6)
         
         self._color_indicator = QLabel()
-        self._color_indicator.setFixedSize(16, 16)
-        self._color_indicator.setStyleSheet("border-radius: 8px;")
+        self._color_indicator.setFixedSize(12, 12)
+        self._color_indicator.setStyleSheet("border-radius: 6px;")
         name_row.addWidget(self._color_indicator)
         
         self._name_label = QLabel()
-        self._name_label.setFont(QFont("Arial", 12, QFont.Weight.Bold))
+        self._name_label.setFont(QFont("Arial", 10, QFont.Weight.Bold))
         name_row.addWidget(self._name_label)
         
         self._status_label = QLabel()
-        self._status_label.setFont(QFont("Arial", 9))
+        self._status_label.setFont(QFont("Arial", 8))
         name_row.addWidget(self._status_label)
         
         name_row.addStretch()
+        
+        # Money on same row as name
+        self._money_label = QLabel()
+        self._money_label.setFont(QFont("Arial", 10, QFont.Weight.Bold))
+        self._money_label.setStyleSheet("color: #27AE60;")
+        name_row.addWidget(self._money_label)
+        
         layout.addLayout(name_row)
         
-        # Money
-        self._money_label = QLabel()
-        self._money_label.setFont(QFont("Arial", 14, QFont.Weight.Bold))
-        self._money_label.setStyleSheet("color: #27AE60;")
-        layout.addWidget(self._money_label)
+        # Info row: position and properties
+        info_row = QHBoxLayout()
+        info_row.setSpacing(8)
         
-        # Position
         self._position_label = QLabel()
-        self._position_label.setFont(QFont("Arial", 9))
-        layout.addWidget(self._position_label)
+        self._position_label.setFont(QFont("Arial", 8))
+        info_row.addWidget(self._position_label)
         
-        # Properties summary
         self._properties_label = QLabel()
-        self._properties_label.setFont(QFont("Arial", 9))
-        self._properties_label.setWordWrap(True)
-        layout.addWidget(self._properties_label)
+        self._properties_label.setFont(QFont("Arial", 8))
+        info_row.addWidget(self._properties_label)
         
-        # Jail cards
+        info_row.addStretch()
+        
+        # Jail cards on same row
         self._jail_cards_label = QLabel()
-        self._jail_cards_label.setFont(QFont("Arial", 9))
-        layout.addWidget(self._jail_cards_label)
+        self._jail_cards_label.setFont(QFont("Arial", 8))
+        info_row.addWidget(self._jail_cards_label)
+        
+        layout.addLayout(info_row)
     
     def update_player(
         self, 
@@ -87,81 +92,91 @@ class PlayerCard(QFrame):
         
         # Color indicator
         self._color_indicator.setStyleSheet(
-            f"background-color: {color.name()}; border-radius: 8px;"
+            f"background-color: {color.name()}; border-radius: 6px;"
         )
         
         # Name with markers
         name_text = name
         if is_self:
             name_text += " (You)"
+        if is_current:
+            name_text = "🎲 " + name_text
+        elif state == "IN_JAIL":
+            name_text = "🔒 " + name_text
+        elif state == "BANKRUPT":
+            name_text = "💀 " + name_text
+        elif state == "DISCONNECTED":
+            name_text = "📴 " + name_text
         self._name_label.setText(name_text)
         
-        # Status
-        status_text = ""
-        if is_current:
-            status_text = "🎲 Current Turn"
-        elif state == "IN_JAIL":
-            status_text = "🔒 In Jail"
-        elif state == "BANKRUPT":
-            status_text = "💀 Bankrupt"
-        elif state == "DISCONNECTED":
-            status_text = "📴 Disconnected"
-        self._status_label.setText(status_text)
+        # Status - simplified, now shown as icon in name
+        self._status_label.setText("")
         
         # Money
         self._money_label.setText(f"${money:,}")
         
-        # Position
+        # Position - shortened
         space_name = BOARD_SPACES.get(position, {}).get("name", f"Space {position}")
+        if len(space_name) > 15:
+            space_name = space_name[:13] + ".."
         self._position_label.setText(f"📍 {space_name}")
         
-        # Properties - group by color
+        # Properties - compact count
         if properties:
-            groups = {}
-            for pos in properties:
-                space = BOARD_SPACES.get(pos, {})
-                group = space.get("group", "Other")
-                if group not in groups:
-                    groups[group] = 0
-                groups[group] += 1
-            
-            prop_text = "🏠 " + ", ".join(f"{g}: {c}" for g, c in groups.items())
+            prop_text = f"🏠 {len(properties)}"
         else:
-            prop_text = "No properties"
+            prop_text = ""
         self._properties_label.setText(prop_text)
         
-        # Jail cards
+        # Jail cards - compact
         if jail_cards > 0:
-            self._jail_cards_label.setText(f"🎫 {jail_cards} Get Out of Jail card(s)")
+            self._jail_cards_label.setText(f"🎫 {jail_cards}")
             self._jail_cards_label.show()
         else:
             self._jail_cards_label.hide()
         
-        # Highlight current player
+        # Highlight current player or self with subtle background
         if is_current:
-            self.setStyleSheet("background-color: #34495E; border: 2px solid #F1C40F;")
+            self.setStyleSheet("background-color: #3d5a6e; border-radius: 4px;")
         elif is_self:
-            self.setStyleSheet("background-color: #2C3E50; border: 2px solid #3498DB;")
+            self.setStyleSheet("background-color: #2d4a5e; border-radius: 4px;")
         elif state == "BANKRUPT":
-            self.setStyleSheet("background-color: #1A1A1A; opacity: 0.5;")
+            self.setStyleSheet("background-color: #1A1A1A; border-radius: 4px; color: #666;")
         else:
-            self.setStyleSheet("background-color: #2C3E50;")
+            self.setStyleSheet("background-color: transparent;")
 
 
-class PlayerPanel(QWidget):
+class PlayerPanel(QFrame):
     """Panel showing all players' information."""
     
     def __init__(self, parent=None):
         super().__init__(parent)
         
+        # Single outline around entire panel
+        self.setFrameStyle(QFrame.Shape.Box)
+        self.setStyleSheet("""
+            PlayerPanel {
+                border: 2px solid #3498DB;
+                border-radius: 8px;
+                background-color: #2C3E50;
+            }
+        """)
+        
         layout = QVBoxLayout(self)
-        layout.setContentsMargins(0, 0, 0, 0)
+        layout.setContentsMargins(8, 8, 8, 8)
+        layout.setSpacing(4)
         
         # Title
         title = QLabel("Players")
-        title.setFont(QFont("Arial", 14, QFont.Weight.Bold))
-        title.setStyleSheet("color: white;")
+        title.setFont(QFont("Arial", 12, QFont.Weight.Bold))
+        title.setStyleSheet("color: white; border: none;")
         layout.addWidget(title)
+        
+        # Separator line
+        separator = QFrame()
+        separator.setFrameShape(QFrame.Shape.HLine)
+        separator.setStyleSheet("background-color: #3498DB; border: none; max-height: 1px;")
+        layout.addWidget(separator)
         
         # Scrollable area for player cards
         scroll = QScrollArea()
@@ -170,8 +185,10 @@ class PlayerPanel(QWidget):
         scroll.setStyleSheet("background: transparent; border: none;")
         
         self._container = QWidget()
+        self._container.setStyleSheet("background: transparent;")
         self._container_layout = QVBoxLayout(self._container)
-        self._container_layout.setSpacing(8)
+        self._container_layout.setSpacing(2)
+        self._container_layout.setContentsMargins(0, 0, 0, 0)
         self._container_layout.addStretch()
         
         scroll.setWidget(self._container)
