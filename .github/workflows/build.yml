@@ -1,0 +1,96 @@
+name: Build Monopoly Executables
+
+# This workflow runs manually - you trigger it from the GitHub Actions tab
+on:
+  workflow_dispatch:
+    inputs:
+      build_type:
+        description: 'Build type'
+        required: true
+        default: 'release'
+        type: choice
+        options:
+          - release
+          - debug
+
+jobs:
+  # ============================================================
+  # Windows Build
+  # ============================================================
+  build-windows:
+    runs-on: windows-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyinstaller
+          pip install -r src/requirements-client.txt
+      
+      - name: Build executable (release)
+        if: ${{ github.event.inputs.build_type == 'release' }}
+        working-directory: src
+        run: python build_app.py --clean
+      
+      - name: Build executable (debug)
+        if: ${{ github.event.inputs.build_type == 'debug' }}
+        working-directory: src
+        run: python build_app.py --clean --debug
+      
+      - name: Upload Windows executable
+        uses: actions/upload-artifact@v4
+        with:
+          name: Monopoly-Windows
+          path: src/dist/Monopoly.exe
+          retention-days: 30
+
+  # ============================================================
+  # macOS Build
+  # ============================================================
+  build-mac:
+    runs-on: macos-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyinstaller
+          pip install -r src/requirements-client.txt
+      
+      - name: Build executable (release)
+        if: ${{ github.event.inputs.build_type == 'release' }}
+        working-directory: src
+        run: python build_app.py --clean
+      
+      - name: Build executable (debug)
+        if: ${{ github.event.inputs.build_type == 'debug' }}
+        working-directory: src
+        run: python build_app.py --clean --debug
+      
+      # macOS builds as .app bundle (which is a folder), so we zip it
+      - name: Zip macOS app bundle
+        working-directory: src/dist
+        run: zip -r Monopoly-Mac.zip Monopoly.app || zip -r Monopoly-Mac.zip Monopoly
+      
+      - name: Upload macOS executable
+        uses: actions/upload-artifact@v4
+        with:
+          name: Monopoly-Mac
+          path: src/dist/Monopoly-Mac.zip
+          retention-days: 30
