@@ -32,10 +32,10 @@ def check_pyinstaller():
     """Check if PyInstaller is installed."""
     try:
         import PyInstaller
-        print(f"✓ PyInstaller {PyInstaller.__version__} found")
+        print(f"[OK] PyInstaller {PyInstaller.__version__} found")
         return True
     except ImportError:
-        print("✗ PyInstaller not found")
+        print("[X] PyInstaller not found")
         print("\nInstall it with:")
         print("  pip install pyinstaller")
         return False
@@ -49,9 +49,9 @@ def check_dependencies():
     for pkg in required:
         try:
             __import__(pkg)
-            print(f"✓ {pkg} found")
+            print(f"[OK] {pkg} found")
         except ImportError:
-            print(f"✗ {pkg} missing")
+            print(f"[X] {pkg} missing")
             missing.append(pkg)
     
     if missing:
@@ -197,7 +197,7 @@ def main():
         return 1
     
     if args.check_only:
-        print("\n✓ All dependencies satisfied")
+        print("\n[OK] All dependencies satisfied")
         return 0
     
     # Clean if requested
@@ -244,3 +244,4 @@ def main():
 
 if __name__ == '__main__':
     sys.exit(main())
+

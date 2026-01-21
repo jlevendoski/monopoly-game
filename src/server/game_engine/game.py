@@ -15,7 +15,8 @@ logger = logging.getLogger(__name__)
 
 from shared.constants import (
     BOARD_SIZE, JAIL_POSITION, GO_TO_JAIL_POSITION,
-    MAX_JAIL_TURNS, JAIL_BAIL, SALARY_AMOUNT, BOARD_SPACES
+    MAX_JAIL_TURNS, JAIL_BAIL, SALARY_AMOUNT, BOARD_SPACES,
+    FREE_PARKING_BASE, DOUBLE_GO_SALARY
 )
 from shared.enums import SpaceType, PlayerState, GamePhase, CardType
 from shared.pokemon import generate_pokemon_assignments
@@ -75,6 +76,9 @@ class Game:
     # Configuration
     min_players: int = 2
     max_players: int = 4
+    
+    # House rules
+    free_parking_pot: int = FREE_PARKING_BASE  # Fines accumulate here
     
     def __post_init__(self):
         """Initialize rule engine after board is created."""
@@ -366,16 +370,32 @@ class Game:
         space_name = space["name"]
         
         if space_type == SpaceType.GO:
+            # House rule: Double salary ($400) for landing exactly on GO
+            bonus = DOUBLE_GO_SALARY - SALARY_AMOUNT  # Extra $200 on top of the $200 already collected
+            player.add_money(bonus)
             self.phase = GamePhase.POST_ROLL
-            return True, f"Landed on GO!", dice_result
+            self._log_event("landed_on_go", {
+                "player_id": player.id,
+                "bonus": bonus,
+                "total": DOUBLE_GO_SALARY,
+            })
+            return True, f"Landed on GO! Collect ${DOUBLE_GO_SALARY}!", dice_result
         
         elif space_type == SpaceType.JAIL:
             self.phase = GamePhase.POST_ROLL
             return True, "Just visiting jail", dice_result
         
         elif space_type == SpaceType.FREE_PARKING:
+            # House rule: Collect the Free Parking pot
+            pot_amount = self.free_parking_pot
+            player.add_money(pot_amount)
+            self.free_parking_pot = FREE_PARKING_BASE  # Reset to base amount
             self.phase = GamePhase.POST_ROLL
-            return True, "Free Parking - take a rest!", dice_result
+            self._log_event("free_parking_collected", {
+                "player_id": player.id,
+                "amount": pot_amount,
+            })
+            return True, f"Free Parking! Collect ${pot_amount}!", dice_result
         
         elif space_type == SpaceType.GO_TO_JAIL:
             player.send_to_jail()
@@ -390,12 +410,14 @@ class Game:
             tax_amount = space["cost"]
             if player.can_afford(tax_amount):
                 player.remove_money(tax_amount)
+                self.free_parking_pot += tax_amount  # House rule: taxes go to Free Parking
                 self.phase = GamePhase.POST_ROLL
                 self._log_event("tax_paid", {
                     "player_id": player.id,
                     "amount": tax_amount,
+                    "free_parking_pot": self.free_parking_pot,
                 })
-                return True, f"Paid ${tax_amount} in taxes", dice_result
+                return True, f"Paid ${tax_amount} in taxes (Free Parking pot: ${self.free_parking_pot})", dice_result
             else:
                 self.phase = GamePhase.PAYING_RENT
                 return True, f"Must pay ${tax_amount} in taxes", dice_result
@@ -507,10 +529,11 @@ class Game:
         elif card.action == CardAction.PAY_MONEY:
             if player.can_afford(card.value):
                 player.remove_money(card.value)
+                self.free_parking_pot += card.value  # House rule: fines go to Free Parking
                 self.phase = GamePhase.POST_ROLL
             else:
                 self.phase = GamePhase.PAYING_RENT
-            return True, f"{card.text} (-${card.value})", dice_result
+            return True, f"{card.text} (-${card.value}, Free Parking pot: ${self.free_parking_pot})", dice_result
         
         elif card.action == CardAction.COLLECT_FROM_PLAYERS:
             total = 0
@@ -579,10 +602,11 @@ class Game:
             
             if player.can_afford(total_cost):
                 player.remove_money(total_cost)
+                self.free_parking_pot += total_cost  # House rule: repairs go to Free Parking
                 self.phase = GamePhase.POST_ROLL
             else:
                 self.phase = GamePhase.PAYING_RENT
-            return True, f"{card.text} (-${total_cost})", dice_result
+            return True, f"{card.text} (-${total_cost}, Free Parking pot: ${self.free_parking_pot})", dice_result
         
         self.phase = GamePhase.POST_ROLL
         return True, card.text, dice_result
@@ -965,6 +989,7 @@ class Game:
             "board": self.board.to_dict(),
             "rules": self.rules.to_dict(),
             "cards": self.cards.to_dict(),
+            "free_parking_pot": self.free_parking_pot,
         }
     
     @classmethod
@@ -995,6 +1020,9 @@ class Game:
         game.board = Board.from_dict(data.get("board", {}))
         game.rules = RuleEngine(game.board)
         game.rules.load_state(data.get("rules", {}))
+        
+        # Load house rules state
+        game.free_parking_pot = data.get("free_parking_pot", FREE_PARKING_BASE)
         
         return game
     
@@ -1027,4 +1055,5 @@ class Game:
             "houses_available": self.rules.houses_available,
             "hotels_available": self.rules.hotels_available,
             "winner_id": self.winner_id,
+            "free_parking_pot": self.free_parking_pot,
         }

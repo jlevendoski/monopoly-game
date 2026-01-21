@@ -7,6 +7,10 @@ All monetary values are in Monopoly dollars.
 BOARD_SIZE = 40
 STARTING_MONEY = 1500
 SALARY_AMOUNT = 200  # Passing GO
+DOUBLE_GO_SALARY = 400  # Landing exactly on GO
+
+# Free Parking house rule
+FREE_PARKING_BASE = 1500  # Base amount in Free Parking pot
 
 # Jail
 JAIL_POSITION = 10
