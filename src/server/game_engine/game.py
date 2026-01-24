@@ -19,7 +19,7 @@ from shared.constants import (
     FREE_PARKING_BASE, DOUBLE_GO_SALARY
 )
 from shared.enums import SpaceType, PlayerState, GamePhase, CardType
-from shared.pokemon import generate_pokemon_assignments
+from shared.pokemon import generate_pokemon_assignments, generate_item_assignments
 
 from .board import Board
 from .player import Player
@@ -208,9 +208,18 @@ class Game:
         try:
             pokemon_assignments = generate_pokemon_assignments()
             self.board.assign_pokemon(pokemon_assignments)
+            self.cards.set_pokemon_names(pokemon_assignments)
             logger.info(f"Assigned Pokemon to {len(pokemon_assignments)} properties")
         except Exception as e:
             logger.warning(f"Failed to assign Pokemon: {e}. Game will continue without Pokemon theming.")
+        
+        # Generate and assign random items to railroads and utilities
+        try:
+            item_assignments = generate_item_assignments()
+            self.board.assign_items(item_assignments)
+            logger.info(f"Assigned items to {len(item_assignments)} railroads/utilities")
+        except Exception as e:
+            logger.warning(f"Failed to assign items: {e}. Railroads/utilities will use default names.")
         
         self.phase = GamePhase.PRE_ROLL
         self.turn_number = 1
@@ -508,7 +517,7 @@ class Game:
         self._log_event("card_drawn", {
             "player_id": player.id,
             "card_type": card_type.value,
-            "card_text": card.text,
+            "card_text": self.cards.get_card_display_text(card),
         })
         
         # Execute card action
@@ -521,10 +530,12 @@ class Game:
         dice_result: DiceResult
     ) -> Tuple[bool, str, DiceResult]:
         """Execute a card's action."""
+        card_display_text = self.cards.get_card_display_text(card)
+        
         if card.action == CardAction.COLLECT_MONEY:
             player.add_money(card.value)
             self.phase = GamePhase.POST_ROLL
-            return True, f"{card.text} (+${card.value})", dice_result
+            return True, f"{card_display_text} (+${card.value})", dice_result
         
         elif card.action == CardAction.PAY_MONEY:
             if player.can_afford(card.value):
@@ -533,7 +544,7 @@ class Game:
                 self.phase = GamePhase.POST_ROLL
             else:
                 self.phase = GamePhase.PAYING_RENT
-            return True, f"{card.text} (-${card.value}, Free Parking pot: ${self.free_parking_pot})", dice_result
+            return True, f"{card_display_text} (-${card.value}, Free Parking pot: ${self.free_parking_pot})", dice_result
         
         elif card.action == CardAction.COLLECT_FROM_PLAYERS:
             total = 0
@@ -544,7 +555,7 @@ class Game:
                     total += amount
             player.add_money(total)
             self.phase = GamePhase.POST_ROLL
-            return True, f"{card.text} (+${total})", dice_result
+            return True, f"{card_display_text} (+${total})", dice_result
         
         elif card.action == CardAction.PAY_TO_PLAYERS:
             total_owed = card.value * (len(self.active_players) - 1)
@@ -556,7 +567,7 @@ class Game:
                 self.phase = GamePhase.POST_ROLL
             else:
                 self.phase = GamePhase.PAYING_RENT
-            return True, f"{card.text} (-${total_owed})", dice_result
+            return True, f"{card_display_text} (-${total_owed})", dice_result
         
         elif card.action == CardAction.MOVE_TO:
             if card.value == -1:
@@ -572,7 +583,7 @@ class Game:
             player.move_to(new_pos)
             logger.debug(
                 f"CARD MOVE: {player.name} moved by card from {old_pos} to {new_pos} "
-                f"(actual: {player.position}), card='{card.text}'"
+                f"(actual: {player.position}), card='{card_display_text}'"
             )
             return self._handle_landing(player, dice_result)
         
@@ -584,12 +595,12 @@ class Game:
         elif card.action == CardAction.GO_TO_JAIL:
             player.send_to_jail()
             self.phase = GamePhase.POST_ROLL
-            return True, card.text, dice_result
+            return True, card_display_text, dice_result
         
         elif card.action == CardAction.GET_OUT_OF_JAIL:
             player.jail_cards += 1
             self.phase = GamePhase.POST_ROLL
-            return True, f"{card.text} (Card kept)", dice_result
+            return True, f"{card_display_text} (Card kept)", dice_result
         
         elif card.action == CardAction.REPAIRS:
             total_cost = 0
@@ -606,10 +617,10 @@ class Game:
                 self.phase = GamePhase.POST_ROLL
             else:
                 self.phase = GamePhase.PAYING_RENT
-            return True, f"{card.text} (-${total_cost}, Free Parking pot: ${self.free_parking_pot})", dice_result
+            return True, f"{card_display_text} (-${total_cost}, Free Parking pot: ${self.free_parking_pot})", dice_result
         
         self.phase = GamePhase.POST_ROLL
-        return True, card.text, dice_result
+        return True, card_display_text, dice_result
     
     # =========== Property Actions ===========
     

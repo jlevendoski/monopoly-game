@@ -3,6 +3,8 @@ Pokemon data management for Pokemon-themed Monopoly.
 
 Handles loading Pokemon data, finding evolution chains, and
 generating random Pokemon assignments for game properties.
+Also handles item data for railroads (Poké Balls) and utilities
+(healing items, teaching items).
 """
 
 import json
@@ -39,6 +41,46 @@ class PokemonInfo:
             image_url=data.get("image_url", ""),
             evolves_from=data.get("evolves_from"),
             evolves_to=data.get("evolves_to", []),
+        )
+
+
+@dataclass
+class ItemInfo:
+    """Information about a single item (Poké Ball, healing item, or TM)."""
+    item_id: str
+    name: str
+    api_name: str
+    image_url: str
+    flavor_text: Optional[str]
+    effect: Optional[str]
+    cost: int
+    teaches_move: Optional[str] = None  # Only for TMs
+    
+    def to_dict(self) -> dict:
+        result = {
+            "item_id": self.item_id,
+            "name": self.name,
+            "api_name": self.api_name,
+            "image_url": self.image_url,
+            "flavor_text": self.flavor_text,
+            "effect": self.effect,
+            "cost": self.cost,
+        }
+        if self.teaches_move:
+            result["teaches_move"] = self.teaches_move
+        return result
+    
+    @classmethod
+    def from_dict(cls, data: dict, item_id: str = "") -> "ItemInfo":
+        return cls(
+            item_id=data.get("item_id", item_id),
+            name=data["name"],
+            api_name=data.get("api_name", ""),
+            image_url=data.get("image_url", ""),
+            flavor_text=data.get("flavor_text"),
+            effect=data.get("effect"),
+            cost=data.get("cost", 0),
+            teaches_move=data.get("teaches_move"),
         )
 
 
@@ -318,3 +360,164 @@ def get_pokemon_database() -> PokemonDatabase:
     if _database_instance is None:
         _database_instance = PokemonDatabase()
     return _database_instance
+
+
+class ItemDatabase:
+    """
+    Manages item data for railroads and utilities.
+    Loads Poké Balls, healing items, and teaching items (TMs).
+    """
+    
+    def __init__(self, data_dir: Optional[Path] = None):
+        """
+        Initialize the Item database.
+        
+        Args:
+            data_dir: Path to directory containing item JSON files.
+                      If None, uses default location.
+        """
+        self._pokeballs: Dict[str, ItemInfo] = {}
+        self._healing_items: Dict[str, ItemInfo] = {}
+        self._teaching_items: Dict[str, ItemInfo] = {}
+        
+        if data_dir is None:
+            data_dir = Path(__file__).parent.parent.parent / "data"
+        
+        self._load_data(data_dir)
+    
+    def _load_items_from_file(self, file_path: Path) -> Dict[str, ItemInfo]:
+        """Load items from a JSON file."""
+        items = {}
+        if not file_path.exists():
+            return items
+        
+        with open(file_path, 'r', encoding='utf-8') as f:
+            raw_data = json.load(f)
+        
+        for item_id, item_data in raw_data.items():
+            # Skip metadata keys like "_NOTE"
+            if item_id.startswith("_"):
+                continue
+            items[item_id] = ItemInfo(
+                item_id=item_id,
+                name=item_data["name"],
+                api_name=item_data.get("api_name", ""),
+                image_url=item_data.get("image_url", ""),
+                flavor_text=item_data.get("flavor_text"),
+                effect=item_data.get("effect"),
+                cost=item_data.get("cost", 0),
+                teaches_move=item_data.get("teaches_move"),
+            )
+        
+        return items
+    
+    def _load_data(self, data_dir: Path) -> None:
+        """Load all item data from JSON files."""
+        self._pokeballs = self._load_items_from_file(data_dir / "pokeballs.json")
+        self._healing_items = self._load_items_from_file(data_dir / "healing_items.json")
+        self._teaching_items = self._load_items_from_file(data_dir / "teaching_items.json")
+    
+    def get_random_pokeballs(self, count: int = 4) -> List[ItemInfo]:
+        """Get random Poké Balls for railroad spaces."""
+        if len(self._pokeballs) < count:
+            raise ValueError(f"Not enough Poké Balls available (need {count}, have {len(self._pokeballs)})")
+        
+        item_ids = random.sample(list(self._pokeballs.keys()), count)
+        return [self._pokeballs[item_id] for item_id in item_ids]
+    
+    def get_random_healing_item(self) -> ItemInfo:
+        """Get a random healing item for utility space."""
+        if not self._healing_items:
+            raise ValueError("No healing items available")
+        
+        item_id = random.choice(list(self._healing_items.keys()))
+        return self._healing_items[item_id]
+    
+    def get_random_teaching_item(self) -> ItemInfo:
+        """Get a random teaching item (TM) for utility space."""
+        if not self._teaching_items:
+            raise ValueError("No teaching items available")
+        
+        item_id = random.choice(list(self._teaching_items.keys()))
+        return self._teaching_items[item_id]
+    
+    @property
+    def pokeball_count(self) -> int:
+        return len(self._pokeballs)
+    
+    @property
+    def healing_item_count(self) -> int:
+        return len(self._healing_items)
+    
+    @property
+    def teaching_item_count(self) -> int:
+        return len(self._teaching_items)
+
+
+# Railroad positions on the board
+RAILROAD_POSITIONS = [5, 15, 25, 35]
+
+# Utility positions on the board
+UTILITY_POSITIONS = {
+    "healing": 12,   # Electric Company -> Healing item
+    "teaching": 28,  # Water Works -> Teaching item (TM)
+}
+
+
+def generate_item_assignments(database: Optional[ItemDatabase] = None) -> Dict[int, dict]:
+    """
+    Generate random item assignments for railroads and utilities.
+    
+    Returns:
+        Dictionary mapping board position to item data dict:
+        {
+            position: {
+                "item_id": str,
+                "name": str,
+                "api_name": str,
+                "image_url": str,
+                "flavor_text": str,
+                "effect": str,
+                "cost": int,
+                "teaches_move": str (only for TMs),
+                "item_type": str ("pokeball", "healing", or "teaching"),
+            }
+        }
+    """
+    if database is None:
+        database = ItemDatabase()
+    
+    assignments: Dict[int, dict] = {}
+    
+    # Assign Poké Balls to railroads
+    pokeballs = database.get_random_pokeballs(len(RAILROAD_POSITIONS))
+    for position, pokeball in zip(RAILROAD_POSITIONS, pokeballs):
+        item_dict = pokeball.to_dict()
+        item_dict["item_type"] = "pokeball"
+        assignments[position] = item_dict
+    
+    # Assign healing item to first utility
+    healing_item = database.get_random_healing_item()
+    healing_dict = healing_item.to_dict()
+    healing_dict["item_type"] = "healing"
+    assignments[UTILITY_POSITIONS["healing"]] = healing_dict
+    
+    # Assign teaching item to second utility
+    teaching_item = database.get_random_teaching_item()
+    teaching_dict = teaching_item.to_dict()
+    teaching_dict["item_type"] = "teaching"
+    assignments[UTILITY_POSITIONS["teaching"]] = teaching_dict
+    
+    return assignments
+
+
+# Singleton item database instance (lazy loaded)
+_item_database_instance: Optional[ItemDatabase] = None
+
+
+def get_item_database() -> ItemDatabase:
+    """Get the singleton Item database instance."""
+    global _item_database_instance
+    if _item_database_instance is None:
+        _item_database_instance = ItemDatabase()
+    return _item_database_instance

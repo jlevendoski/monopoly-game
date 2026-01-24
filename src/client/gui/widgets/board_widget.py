@@ -159,13 +159,18 @@ class BoardWidget(QWidget):
         # Get property data if we have game state
         prop_data = None
         pokemon_data = None
+        item_data = None
         if self._game_state:
             prop_data = self._game_state.get("board", {}).get(str(position))
             if prop_data:
                 pokemon_data = prop_data.get("pokemon")
-                # Use Pokemon name if available
+                item_data = prop_data.get("item")
+                # Use Pokemon name if available (for color properties)
                 if pokemon_data and pokemon_data.get("name"):
                     space_name = pokemon_data["name"]
+                # Use item name if available (for railroads/utilities)
+                elif item_data and item_data.get("name"):
+                    space_name = item_data["name"]
         
         # Background color - properties get WHITE background, special spaces get their color
         # The property COLOR is shown only in the color bar, not the whole space
@@ -204,7 +209,7 @@ class BoardWidget(QWidget):
             # Non-property spaces (railroads, utilities, special spaces)
             self._draw_non_property_space(
                 painter, rect, position, space_type, 
-                space_name, space_cost, is_vertical, prop_data
+                space_name, space_cost, is_vertical, prop_data, item_data
             )
         
         # Draw mortgaged overlay (on top of everything)
@@ -474,10 +479,17 @@ class BoardWidget(QWidget):
         name: str,
         cost: Optional[int],
         is_vertical: bool,
-        prop_data: Optional[dict]
+        prop_data: Optional[dict],
+        item_data: Optional[dict] = None
     ) -> None:
         """Draw non-property spaces (railroads, utilities, special spaces)."""
-        # Draw name
+        # If we have item data (for railroads/utilities), draw with image
+        if item_data and item_data.get("image_url"):
+            self._draw_item_space(painter, rect, position, space_type, name, 
+                                  cost, is_vertical, item_data)
+            return
+        
+        # Fallback: Draw name only (for special spaces or when no item data)
         painter.setPen(QPen(Qt.GlobalColor.black))
         font = QFont("Arial", 6)
         painter.setFont(font)
@@ -497,6 +509,115 @@ class BoardWidget(QWidget):
             )
         else:
             painter.drawText(rect, Qt.AlignmentFlag.AlignCenter, short_name)
+        painter.restore()
+    
+    def _draw_item_space(
+        self,
+        painter: QPainter,
+        rect: QRect,
+        position: int,
+        space_type: str,
+        name: str,
+        cost: Optional[int],
+        is_vertical: bool,
+        item_data: dict
+    ) -> None:
+        """Draw a railroad or utility space with item image."""
+        image_url = item_data.get("image_url", "")
+        item_name = item_data.get("name", name)
+        
+        # Calculate regions: image area (70%) and price area (30%)
+        if is_vertical:
+            price_size = max(rect.width() // 5, 8)
+            image_size = rect.width() - price_size
+            
+            if position in range(11, 20):  # Left side
+                price_rect = QRect(rect.left(), rect.top(), price_size, rect.height())
+                image_rect = QRect(rect.left() + price_size, rect.top(), image_size, rect.height())
+            else:  # Right side
+                price_rect = QRect(rect.right() - price_size, rect.top(), price_size, rect.height())
+                image_rect = QRect(rect.left(), rect.top(), image_size, rect.height())
+        else:
+            price_size = max(rect.height() // 5, 8)
+            image_size = rect.height() - price_size
+            
+            if position in range(1, 10):  # Bottom edge
+                price_rect = QRect(rect.left(), rect.bottom() - price_size, rect.width(), price_size)
+                image_rect = QRect(rect.left(), rect.top(), rect.width(), image_size)
+            else:  # Top edge
+                price_rect = QRect(rect.left(), rect.top(), rect.width(), price_size)
+                image_rect = QRect(rect.left(), rect.top() + price_size, rect.width(), image_size)
+        
+        # Draw item image with name
+        self._draw_item_image(painter, image_rect, image_url, item_name, is_vertical, position)
+        
+        # Draw price
+        if cost:
+            self._draw_price(painter, price_rect, cost, is_vertical)
+    
+    def _draw_item_image(
+        self,
+        painter: QPainter,
+        rect: QRect,
+        image_url: str,
+        item_name: str,
+        is_vertical: bool,
+        position: int
+    ) -> None:
+        """Draw an item image with name underneath."""
+        cache = get_image_cache()
+        
+        # Calculate image dimensions (leave room for name)
+        name_height = 10
+        if is_vertical:
+            img_width = rect.width() - 4
+            img_height = rect.height() - name_height - 4
+        else:
+            img_width = rect.width() - 4
+            img_height = rect.height() - name_height - 4
+        
+        pixmap = cache.get_pixmap(image_url, img_width, img_height) if image_url else None
+        
+        if pixmap and not pixmap.isNull():
+            # Center the image in the available space
+            img_x = rect.left() + (rect.width() - pixmap.width()) // 2
+            img_y = rect.top() + 2
+            painter.drawPixmap(img_x, img_y, pixmap)
+        
+        # Draw item name at the bottom of the image area
+        painter.setPen(QPen(Qt.GlobalColor.black))
+        font = QFont("Arial", 5)
+        font.setBold(True)
+        painter.setFont(font)
+        
+        # Truncate name if too long
+        fm = QFontMetrics(font)
+        display_name = item_name
+        max_width = rect.width() - 4 if not is_vertical else rect.height() - 4
+        if fm.horizontalAdvance(display_name) > max_width:
+            while fm.horizontalAdvance(display_name + "..") > max_width and len(display_name) > 1:
+                display_name = display_name[:-1]
+            display_name += ".."
+        
+        name_rect = QRect(
+            rect.left(), 
+            rect.bottom() - name_height,
+            rect.width(),
+            name_height
+        )
+        
+        painter.save()
+        if is_vertical:
+            painter.translate(rect.center())
+            painter.rotate(90 if position in range(11, 20) else -90)
+            painter.drawText(
+                QRect(-rect.height()//2, -rect.width()//2 + rect.width() - name_height,
+                      rect.height(), name_height),
+                Qt.AlignmentFlag.AlignCenter,
+                display_name
+            )
+        else:
+            painter.drawText(name_rect, Qt.AlignmentFlag.AlignCenter, display_name)
         painter.restore()
     
     def _draw_buildings(

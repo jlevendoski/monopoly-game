@@ -42,6 +42,49 @@ class PokemonData:
 
 
 @dataclass
+class ItemData:
+    """Item data associated with railroads and utilities."""
+    item_id: str
+    name: str
+    api_name: str
+    image_url: str
+    flavor_text: Optional[str]
+    effect: Optional[str]
+    cost: int
+    item_type: str  # "pokeball", "healing", or "teaching"
+    teaches_move: Optional[str] = None  # Only for TMs
+    
+    def to_dict(self) -> dict:
+        result = {
+            "item_id": self.item_id,
+            "name": self.name,
+            "api_name": self.api_name,
+            "image_url": self.image_url,
+            "flavor_text": self.flavor_text,
+            "effect": self.effect,
+            "cost": self.cost,
+            "item_type": self.item_type,
+        }
+        if self.teaches_move:
+            result["teaches_move"] = self.teaches_move
+        return result
+    
+    @classmethod
+    def from_dict(cls, data: dict) -> "ItemData":
+        return cls(
+            item_id=data.get("item_id", ""),
+            name=data.get("name", ""),
+            api_name=data.get("api_name", ""),
+            image_url=data.get("image_url", ""),
+            flavor_text=data.get("flavor_text"),
+            effect=data.get("effect"),
+            cost=data.get("cost", 0),
+            item_type=data.get("item_type", ""),
+            teaches_move=data.get("teaches_move"),
+        )
+
+
+@dataclass
 class Property:
     """Represents a purchasable property on the board."""
     
@@ -59,8 +102,11 @@ class Property:
     has_hotel: bool = False
     is_mortgaged: bool = False
     
-    # Pokemon theming (None for railroads/utilities)
+    # Pokemon theming (for color properties)
     pokemon: PokemonData | None = None
+    
+    # Item theming (for railroads and utilities)
+    item: ItemData | None = None
     
     @property
     def is_owned(self) -> bool:
@@ -237,6 +283,8 @@ class Property:
         }
         if self.pokemon:
             result["pokemon"] = self.pokemon.to_dict()
+        if self.item:
+            result["item"] = self.item.to_dict()
         return result
 
 
@@ -249,6 +297,7 @@ class Board:
     
     properties: Dict[int, Property] = field(default_factory=dict)
     pokemon_assignments: Dict[int, dict] = field(default_factory=dict)
+    item_assignments: Dict[int, dict] = field(default_factory=dict)
     
     def __post_init__(self):
         """Initialize board with all properties."""
@@ -282,6 +331,21 @@ class Board:
                 prop.pokemon = PokemonData.from_dict(pokemon_data)
                 # Update property name to Pokemon name
                 prop.name = pokemon_data.get("name", prop.name)
+    
+    def assign_items(self, assignments: Dict[int, dict]) -> None:
+        """
+        Assign items to railroads and utilities.
+        
+        Args:
+            assignments: Dictionary mapping board position to item data dict
+        """
+        self.item_assignments = assignments
+        for position, item_data in assignments.items():
+            if position in self.properties:
+                prop = self.properties[position]
+                prop.item = ItemData.from_dict(item_data)
+                # Update property name to item name
+                prop.name = item_data.get("name", prop.name)
     
     def get_space(self, position: int) -> dict:
         """
@@ -475,6 +539,7 @@ class Board:
                 for pos, prop in self.properties.items()
             },
             "pokemon_assignments": self.pokemon_assignments,
+            "item_assignments": self.item_assignments,
         }
     
     @classmethod
@@ -488,6 +553,13 @@ class Board:
             # Convert string keys back to int
             pokemon_assignments = {int(k): v for k, v in pokemon_assignments.items()}
             board.assign_pokemon(pokemon_assignments)
+        
+        # Restore item assignments if present
+        item_assignments = data.get("item_assignments", {})
+        if item_assignments:
+            # Convert string keys back to int
+            item_assignments = {int(k): v for k, v in item_assignments.items()}
+            board.assign_items(item_assignments)
         
         # Then restore property state
         for pos_str, prop_data in data.get("properties", {}).items():
@@ -503,5 +575,10 @@ class Board:
                 if "pokemon" in prop_data:
                     prop.pokemon = PokemonData.from_dict(prop_data["pokemon"])
                     prop.name = prop_data["pokemon"].get("name", prop.name)
+                
+                # Restore item data if present
+                if "item" in prop_data:
+                    prop.item = ItemData.from_dict(prop_data["item"])
+                    prop.name = prop_data["item"].get("name", prop.name)
         
         return board

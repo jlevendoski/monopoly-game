@@ -47,8 +47,12 @@ class PropertyDialog(QDialog):
             color_bar.setStyleSheet(f"background-color: {color.name()};")
             layout.addWidget(color_bar)
         
-        # Name
+        # Name - use Pokemon/item name if available, otherwise default
         name = space.get("name", f"Space {position}")
+        if prop_data.get("pokemon", {}).get("name"):
+            name = prop_data["pokemon"]["name"]
+        elif prop_data.get("item", {}).get("name"):
+            name = prop_data["item"]["name"]
         name_label = QLabel(name)
         name_label.setFont(QFont("Arial", 18, QFont.Weight.Bold))
         name_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
