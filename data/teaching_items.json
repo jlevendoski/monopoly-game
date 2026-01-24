@@ -1,0 +1,902 @@
+{
+  "1": {
+    "name": "Tm01",
+    "api_name": "tm01",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "Powerful, but makes the user flinch if hit by the foe.",
+    "effect": "Teaches Hone Claws to a compatible Pokémon. (Gen IV & III: Focus Punch Gen II: DynamicPunch Gen I: Mega Punch)",
+    "cost": 40000,
+    "teaches_move": "Mega Punch"
+  },
+  "2": {
+    "name": "Tm02",
+    "api_name": "tm02",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "Hooks and slashes the foe with long, sharp claws.",
+    "effect": "Teaches Dragon Claw to a compatible Pokémon. (Gen II: Headbutt Gen I: Razor Wind)",
+    "cost": 1000,
+    "teaches_move": "Razor Wind"
+  },
+  "3": {
+    "name": "Tm03",
+    "api_name": "tm03",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "Generates an ultrasonic wave that may confuse.",
+    "effect": "Teaches Psyshock to a compatible Pokémon. (Gen IV & III: Water Pulse Gen II: Curse Gen I: Swords Dance)",
+    "cost": 50000,
+    "teaches_move": "Swords Dance"
+  },
+  "4": {
+    "name": "Tm04",
+    "api_name": "tm04",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "Raises SP. ATK and SP. DEF by focusing the mind.",
+    "effect": "Teaches Calm Mind to a compatible Pokémon. (Gen II: Rollout Gen I: Whirlwind)",
+    "cost": 50000,
+    "teaches_move": "Whirlwind"
+  },
+  "5": {
+    "name": "Tm05",
+    "api_name": "tm05",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "A savage roar that makes the foe flee  to end the battle.",
+    "effect": "Teaches Roar to a compatible Pokémon. (Gen I: Mega Kick)",
+    "cost": 50000,
+    "teaches_move": "Mega Kick"
+  },
+  "6": {
+    "name": "Tm06",
+    "api_name": "tm06",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "Poisons the foe with a toxin that gradually worsens.",
+    "effect": "Teaches Toxic to a compatible Pokémon.",
+    "cost": 1000,
+    "teaches_move": "Toxic"
+  },
+  "7": {
+    "name": "Tm07",
+    "api_name": "tm07",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "Summons a hailstorm that hurts all types except ICE.",
+    "effect": "Teaches Hail to a compatible Pokémon. (Gen II: Zap Cannon Gen I: Horn Drill)",
+    "cost": 1000,
+    "teaches_move": "Horn Drill"
+  },
+  "8": {
+    "name": "Tm08",
+    "api_name": "tm08",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "Bulks up the body to boost both ATTACK & DEFENSE.",
+    "effect": "Teaches Bulk Up to a compatible Pokémon. (Gen II: Rock Smash Gen I: Body Slam)",
+    "cost": 50000,
+    "teaches_move": "Body Slam"
+  },
+  "9": {
+    "name": "Tm09",
+    "api_name": "tm09",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "Shoots 2 to 5 seeds in a row to strike the foe.",
+    "effect": "Teaches Venoshock to a compatible Pokémon. (Gen IV & III: Bullet Seed Gen II: Psych Up Gen I: Take Down)",
+    "cost": 50000,
+    "teaches_move": "Take Down"
+  },
+  "10": {
+    "name": "Tm10",
+    "api_name": "tm10",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "The attack power varies among different POKéMON.",
+    "effect": "Teaches Hidden Power to a compatible Pokémon. (Gen I: Double-Edge)",
+    "cost": 1000,
+    "teaches_move": "Double Edge"
+  },
+  "11": {
+    "name": "Tm11",
+    "api_name": "tm11",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "Raises the power of FIRE-type moves for 5 turns.",
+    "effect": "Teaches Sunny Day to a compatible Pokémon. (Gen I: BubbleBeam)",
+    "cost": 1000,
+    "teaches_move": "Bubble Beam"
+  },
+  "12": {
+    "name": "Tm12",
+    "api_name": "tm12",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "Enrages the foe so it can only use attack moves.",
+    "effect": "Teaches Taunt to a compatible Pokémon. (Gen II: Sweet Scent Gen I: Water Gun)",
+    "cost": 50000,
+    "teaches_move": "Water Gun"
+  },
+  "13": {
+    "name": "Tm13",
+    "api_name": "tm13",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "Fires an icy cold beam that may freeze the foe.",
+    "effect": "Teaches Ice Beam to a compatible Pokémon. (Gen II: Snore)",
+    "cost": 10000,
+    "teaches_move": "Ice Beam"
+  },
+  "14": {
+    "name": "Tm14",
+    "api_name": "tm14",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "A vicious snow-and- wind attack that may freeze the foe.",
+    "effect": "Teaches Blizzard to a compatible Pokémon.",
+    "cost": 1000,
+    "teaches_move": "Blizzard"
+  },
+  "15": {
+    "name": "Tm15",
+    "api_name": "tm15",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "Powerful, but needs recharging the next turn.",
+    "effect": "Teaches Hyper Beam to a compatible Pokémon.",
+    "cost": 1000,
+    "teaches_move": "Hyper Beam"
+  },
+  "16": {
+    "name": "Tm16",
+    "api_name": "tm16",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "Creates a wall of light that lowers SP. ATK damage.",
+    "effect": "Teaches Light Screen to a compatible Pokémon. (Gen II: Icy Wind Gen I: Pay Day)",
+    "cost": 1000,
+    "teaches_move": "Pay Day"
+  },
+  "17": {
+    "name": "Tm17",
+    "api_name": "tm17",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "Negates all damage, but may fail if used in succession.",
+    "effect": "Teaches Protect to a compatible Pokémon. (Gen I: Submission)",
+    "cost": 10000,
+    "teaches_move": "Submission"
+  },
+  "18": {
+    "name": "Tm18",
+    "api_name": "tm18",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "Raises the power of WATER-type moves for 5 turns.",
+    "effect": "Teaches Rain Dance to a compatible Pokémon. (Gen I: Counter)",
+    "cost": 10000,
+    "teaches_move": "Counter"
+  },
+  "19": {
+    "name": "Tm19",
+    "api_name": "tm19",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "Recovers half the HP of the damage  this move inflicts.",
+    "effect": "Teaches Telekinesis to a compatible Pokémon. (Gen IV & III & II: Giga Drain Gen I: Seismic Toss)",
+    "cost": 10000,
+    "teaches_move": "Seismic Toss"
+  },
+  "20": {
+    "name": "Tm20",
+    "api_name": "tm20",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "Prevents status abnormality with a mystical power.",
+    "effect": "Teaches Safeguard to a compatible Pokémon. (Gen II: Endure Gen I: Rage)",
+    "cost": 100000,
+    "teaches_move": "Rage"
+  },
+  "21": {
+    "name": "Tm21",
+    "api_name": "tm21",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "The less the user likes you, the more powerful this move.",
+    "effect": "Teaches Frustration to a compatible Pokémon. (Gen I: Mega Drain)",
+    "cost": 1000,
+    "teaches_move": "Mega Drain"
+  },
+  "22": {
+    "name": "Tm22",
+    "api_name": "tm22",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "Absorbs sunlight in the 1st turn, then attacks next turn.",
+    "effect": "Teaches SolarBeam to a compatible Pokémon.",
+    "cost": 1000,
+    "teaches_move": "Solar Beam"
+  },
+  "23": {
+    "name": "Tm23",
+    "api_name": "tm23",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "Slams the foe with a hard tail. It may lower DEFENSE.",
+    "effect": "Teaches Smack Down to a compatible Pokémon. (Gen IV & III & II: Iron Tail Gen I: Dragon Rage)",
+    "cost": 10000,
+    "teaches_move": "Dragon Rage"
+  },
+  "24": {
+    "name": "Tm24",
+    "api_name": "tm24",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "A powerful electric attack that may cause paralysis.",
+    "effect": "Teaches Thunderbolt to a compatible Pokémon. (Gen II: DragonBreath)",
+    "cost": 1000,
+    "teaches_move": "Thunderbolt"
+  },
+  "25": {
+    "name": "Tm25",
+    "api_name": "tm25",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "Strikes the foe with a thunderbolt. It may paralyze.",
+    "effect": "Teaches Thunder to a compatible Pokémon.",
+    "cost": 10000,
+    "teaches_move": "Thunder"
+  },
+  "26": {
+    "name": "Tm26",
+    "api_name": "tm26",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "Causes a quake that has no effect on flying foes.",
+    "effect": "Teaches Earthquake to a compatible Pokémon.",
+    "cost": 1000,
+    "teaches_move": "Earthquake"
+  },
+  "27": {
+    "name": "Tm27",
+    "api_name": "tm27",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "The more the user likes you, the more powerful this move.",
+    "effect": "Teaches Return to a compatible Pokémon. (Gen I: Fissure)",
+    "cost": 1000,
+    "teaches_move": "Fissure"
+  },
+  "28": {
+    "name": "Tm28",
+    "api_name": "tm28",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "Digs underground the 1st turn, then strikes next turn.",
+    "effect": "Teaches Dig to a compatible Pokémon.",
+    "cost": 100000,
+    "teaches_move": "Dig"
+  },
+  "29": {
+    "name": "Tm29",
+    "api_name": "tm29",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "A powerful psychic attack that may lower SP. DEF.",
+    "effect": "Teaches Psychic to a compatible Pokémon.",
+    "cost": 1000,
+    "teaches_move": "Psychic"
+  },
+  "30": {
+    "name": "Tm30",
+    "api_name": "tm30",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "Hurls a dark lump at the foe. It may lower SP. DEF.",
+    "effect": "Teaches Shadow Ball to a compatible Pokémon. (Gen I: Teleport)",
+    "cost": 1000,
+    "teaches_move": "Teleport"
+  },
+  "31": {
+    "name": "Tm31",
+    "api_name": "tm31",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "Destroys barriers like LIGHT SCREEN and causes damage.",
+    "effect": "Teaches Brick Break to a compatible Pokémon. (Gen II: Mud-Slap Gen I: Mimic)",
+    "cost": 1000,
+    "teaches_move": "Mimic"
+  },
+  "32": {
+    "name": "Tm32",
+    "api_name": "tm32",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "Creates illusory copies to enhance elusiveness.",
+    "effect": "Teaches Double Team to a compatible Pokémon.",
+    "cost": 10000,
+    "teaches_move": "Double Team"
+  },
+  "33": {
+    "name": "Tm33",
+    "api_name": "tm33",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "Creates a wall of light that weakens physical attacks.",
+    "effect": "Teaches Reflect to a compatible Pokémon. (Gen II: Ice Punch)",
+    "cost": 10000,
+    "teaches_move": "Reflect"
+  },
+  "34": {
+    "name": "Tm34",
+    "api_name": "tm34",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "Zaps the foe with a jolt of electricity that never misses.",
+    "effect": "Teaches Sludge Wave to a compatible Pokémon. (Gen IV & III: Shock Wave Gen II: Swagger Gen I: Bide)",
+    "cost": 10000,
+    "teaches_move": "Bide"
+  },
+  "35": {
+    "name": "Tm35",
+    "api_name": "tm35",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "Looses a stream of fire that may burn the foe.",
+    "effect": "Teaches Flamethrower to a compatible Pokémon. (Gen II: Sleep Talk Gen I: Metronome)",
+    "cost": 10000,
+    "teaches_move": "Metronome"
+  },
+  "36": {
+    "name": "Tm36",
+    "api_name": "tm36",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "Hurls sludge at the foe. It may poison the foe.",
+    "effect": "Teaches Sludge Bomb to a compatible Pokémon. (Gen I: Selfdestruct)",
+    "cost": 1000,
+    "teaches_move": "Self Destruct"
+  },
+  "37": {
+    "name": "Tm37",
+    "api_name": "tm37",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "Causes a sandstorm that hits the foe over several turns.",
+    "effect": "Teaches Sandstorm to a compatible Pokémon. (Gen I: Egg Bomb)",
+    "cost": 1000,
+    "teaches_move": "Egg Bomb"
+  },
+  "38": {
+    "name": "Tm38",
+    "api_name": "tm38",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "A powerful fire attack that may burn the foe.",
+    "effect": "Teaches Fire Blast to a compatible Pokémon.",
+    "cost": 1000,
+    "teaches_move": "Fire Blast"
+  },
+  "39": {
+    "name": "Tm39",
+    "api_name": "tm39",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "Stops the foe from moving with rocks. May lower SPEED.",
+    "effect": "Teaches Rock Tomb to a compatible Pokémon. (Gen II & I: Swift)",
+    "cost": 1000,
+    "teaches_move": "Swift"
+  },
+  "40": {
+    "name": "Tm40",
+    "api_name": "tm40",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "An extremely fast attack that can’t be avoided.",
+    "effect": "Teaches Aerial Ace to a compatible Pokémon. (Gen II: Defense Curl Gen I: Skull Bash)",
+    "cost": 1000,
+    "teaches_move": "Skull Bash"
+  },
+  "41": {
+    "name": "Tm41",
+    "api_name": "tm41",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "Prevents the foe from using the same move in a row.",
+    "effect": "Teaches Torment to a compatible Pokémon. (Gen II: ThunderPunch Gen I: Softboiled)",
+    "cost": 10000,
+    "teaches_move": "Soft Boiled"
+  },
+  "42": {
+    "name": "Tm42",
+    "api_name": "tm42",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "Raises ATTACK when poisoned, burned, or paralyzed.",
+    "effect": "Teaches Facade to a compatible Pokémon. (Gen II & I: Dream Eater)",
+    "cost": 1000,
+    "teaches_move": "Dream Eater"
+  },
+  "43": {
+    "name": "Tm43",
+    "api_name": "tm43",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "Adds an effect to attack depending on the location.",
+    "effect": "Teaches Flame Charge to a compatible Pokémon. (Gen IV & III: Secret Power Gen II: Detect Gen I: Sky Attack)",
+    "cost": 1000,
+    "teaches_move": "Sky Attack"
+  },
+  "44": {
+    "name": "Tm44",
+    "api_name": "tm44",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "The user sleeps for 2 turns to restore health and status.",
+    "effect": "Teaches Rest to a compatible Pokémon.",
+    "cost": 100000,
+    "teaches_move": "Rest"
+  },
+  "45": {
+    "name": "Tm45",
+    "api_name": "tm45",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "Makes it tough to attack a foe of the opposite gender.",
+    "effect": "Teaches Attract to a compatible Pokémon. (Gen I: Thunder Wave)",
+    "cost": 1000,
+    "teaches_move": "Thunder Wave"
+  },
+  "46": {
+    "name": "Tm46",
+    "api_name": "tm46",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "While attacking, it may steal the foe’s held item.",
+    "effect": "Teaches Thief to a compatible Pokémon. (Gen I: Psywave)",
+    "cost": 30000,
+    "teaches_move": "Psywave"
+  },
+  "47": {
+    "name": "Tm47",
+    "api_name": "tm47",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "Spreads hard-edged wings and slams into the foe.",
+    "effect": "Teaches Low Sweep to a compatible Pokémon. (Gen IV & III & II: Steel Wing Gen I: Explosion)",
+    "cost": 1000,
+    "teaches_move": "Explosion"
+  },
+  "48": {
+    "name": "Tm48",
+    "api_name": "tm48",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "Switches abilities with the foe on the turn this is used.",
+    "effect": "Teaches Round to a compatible Pokémon. (Gen IV & III: Skill Swap Gen II: Fire Punch Gen I: Rock Slide)",
+    "cost": 1000,
+    "teaches_move": "Rock Slide"
+  },
+  "49": {
+    "name": "Tm49",
+    "api_name": "tm49",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "Steals the effects of the move the foe is trying to use.",
+    "effect": "Teaches Echoed Voice to a compatible Pokémon. (Gen IV & III: Snatch Gen II: Fury Cutter Gen I: Tri Attack)",
+    "cost": 1000,
+    "teaches_move": "Tri Attack"
+  },
+  "50": {
+    "name": "Tm50",
+    "api_name": "tm50",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "Enables full-power attack, but sharply lowers SP. ATK.",
+    "effect": "Teaches Overheat to a compatible Pokémon. (Gen II: Nightmare Gen I: Substitute)",
+    "cost": 10000,
+    "teaches_move": "Substitute"
+  },
+  "51": {
+    "name": "Tm51",
+    "api_name": "tm51",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "The user lands and rests its body. It restores the user’s HP by up to half of its top HP.",
+    "effect": "Teaches Ally Switch to a compatible Pokémon. (Gen IV: Roost)",
+    "cost": 1000,
+    "teaches_move": "Roost"
+  },
+  "52": {
+    "name": "Tm52",
+    "api_name": "tm52",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "The user attacks at full power. It may also lower the foe’s Sp. Def stat if it hits.",
+    "effect": "Teaches Focus Blast to a compatible Pokémon.",
+    "cost": 100000,
+    "teaches_move": "Focus Blast"
+  },
+  "53": {
+    "name": "Tm53",
+    "api_name": "tm53",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "The user draws power from nature and fires it at the foe. It may also lower the target’s Sp. Def.",
+    "effect": "Teaches Energy Ball to a compatible Pokémon.",
+    "cost": 1000,
+    "teaches_move": "Energy Ball"
+  },
+  "54": {
+    "name": "Tm54",
+    "api_name": "tm54",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "A restrained attack that prevents the foe from fainting. The target is left with at least 1 HP.",
+    "effect": "Teaches False Swipe to a compatible Pokémon.",
+    "cost": 1000,
+    "teaches_move": "False Swipe"
+  },
+  "55": {
+    "name": "Tm55",
+    "api_name": "tm55",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "If the foe’s HP is down to under half, this attack will hit with double the power.",
+    "effect": "Teaches Scald to a compatible Pokémon. (Gen IV: Brine)",
+    "cost": 10000,
+    "teaches_move": "Brine"
+  },
+  "56": {
+    "name": "Tm56",
+    "api_name": "tm56",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "The user flings its held item at the foe to attack. Its power and effects depend on the item.",
+    "effect": "Teaches Fling to a compatible Pokémon.",
+    "cost": 1000,
+    "teaches_move": "Fling"
+  },
+  "57": {
+    "name": "Tm57",
+    "api_name": "tm57",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "The user attacks with an electric charge. The user may use any remaining electricity to raise its Sp. Atk stat.",
+    "effect": "Teaches Charge Beam to a compatible Pokémon.",
+    "cost": 1000,
+    "teaches_move": "Charge Beam"
+  },
+  "58": {
+    "name": "Tm58",
+    "api_name": "tm58",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "The user endures any attack, leaving 1 HP. Its chance of failing rises if it is used in succession.",
+    "effect": "Teaches Sky Drop to a compatible Pokémon. (Gen IV: Endure)",
+    "cost": 1000,
+    "teaches_move": "Endure"
+  },
+  "59": {
+    "name": "Tm59",
+    "api_name": "tm59",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "The foe is attacked with a shock wave generated by the user’s gaping mouth.",
+    "effect": "Teaches Incinerate to a compatible Pokémon. (Gen IV: Dragon Pulse)",
+    "cost": 100000,
+    "teaches_move": "Dragon Pulse"
+  },
+  "60": {
+    "name": "Tm60",
+    "api_name": "tm60",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "An energy-draining punch. The user’s HP is restored by half the damage taken by the target.",
+    "effect": "Teaches Quash to a compatible Pokémon. (Gen IV: Drain Punch)",
+    "cost": 30000,
+    "teaches_move": "Drain Punch"
+  },
+  "61": {
+    "name": "Tm61",
+    "api_name": "tm61",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "The user shoots a sinister, bluish white flame at the foe to inflict a burn.",
+    "effect": "Teaches Will-O-Wisp to a compatible Pokémon.",
+    "cost": 30000,
+    "teaches_move": "Will O Wisp"
+  },
+  "62": {
+    "name": "Tm62",
+    "api_name": "tm62",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "The foe is attacked with powdery scales blown by wind. It may also raise all the user’s stats.",
+    "effect": "Teaches Acrobatics to a compatible Pokémon. (Gen IV: Silver Wind)",
+    "cost": 30000,
+    "teaches_move": "Silver Wind"
+  },
+  "63": {
+    "name": "Tm63",
+    "api_name": "tm63",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "It prevents the foe from using its held item. Its Trainer is also prevented from using items on it.",
+    "effect": "Teaches Embargo to a compatible Pokémon.",
+    "cost": 50000,
+    "teaches_move": "Embargo"
+  },
+  "64": {
+    "name": "Tm64",
+    "api_name": "tm64",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "The user explodes to inflict damage on all Pokémon in battle. The user faints upon using this move.",
+    "effect": "Teaches Explosion to a compatible Pokémon.",
+    "cost": 1000,
+    "teaches_move": "Explosion"
+  },
+  "65": {
+    "name": "Tm65",
+    "api_name": "tm65",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "The user slashes with a sharp claw made from shadows. It has a high critical-hit ratio.",
+    "effect": "Teaches Shadow Claw to a compatible Pokémon.",
+    "cost": 1000,
+    "teaches_move": "Shadow Claw"
+  },
+  "66": {
+    "name": "Tm66",
+    "api_name": "tm66",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "The user stores power, then attacks. If the user can use this attack after the foe, its power is doubled.",
+    "effect": "Teaches Payback to a compatible Pokémon.",
+    "cost": 30000,
+    "teaches_move": "Payback"
+  },
+  "67": {
+    "name": "Tm67",
+    "api_name": "tm67",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "The user recycles a single-use item that has been used in battle so it can be used again.",
+    "effect": "Teaches Retaliate to a compatible Pokémon. (Gen IV: Recycle)",
+    "cost": 30000,
+    "teaches_move": "Recycle"
+  },
+  "68": {
+    "name": "Tm68",
+    "api_name": "tm68",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "The user charges the foe using every bit of its power. It must rest on the next turn to recover.",
+    "effect": "Teaches Giga Impact to a compatible Pokémon.",
+    "cost": 30000,
+    "teaches_move": "Giga Impact"
+  },
+  "69": {
+    "name": "Tm69",
+    "api_name": "tm69",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "The user polishes its body to reduce drag. It sharply raises the Speed stat.",
+    "effect": "Teaches Rock Polish to a compatible Pokémon.",
+    "cost": 1000,
+    "teaches_move": "Rock Polish"
+  },
+  "70": {
+    "name": "Tm70",
+    "api_name": "tm70",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "The user flashes a light that cuts the foe’s accuracy. It can also be used to illuminate caves.",
+    "effect": "Teaches Flash to a compatible Pokémon.",
+    "cost": 50000,
+    "teaches_move": "Flash"
+  },
+  "71": {
+    "name": "Tm71",
+    "api_name": "tm71",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "The user stabs the foe with a sharpened stone from below. It has a high critical-hit ratio.",
+    "effect": "Teaches Stone Edge to a compatible Pokémon.",
+    "cost": 50000,
+    "teaches_move": "Stone Edge"
+  },
+  "72": {
+    "name": "Tm72",
+    "api_name": "tm72",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "An attack move that inflicts double the damage if the user has been hurt by the foe in the same turn.",
+    "effect": "Teaches Volt Switch to a compatible Pokémon. (Gen IV: Avalanche)",
+    "cost": 50000,
+    "teaches_move": "Avalanche"
+  },
+  "73": {
+    "name": "Tm73",
+    "api_name": "tm73",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "A weak electric charge is launched at the foe. It causes paralysis if it hits.",
+    "effect": "Teaches Thunder Wave to a compatible Pokémon.",
+    "cost": 1000,
+    "teaches_move": "Thunder Wave"
+  },
+  "74": {
+    "name": "Tm74",
+    "api_name": "tm74",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "The user tackles the foe from a high-speed spin. The slower the user, the greater the damage.",
+    "effect": "Teaches Gyro Ball to a compatible Pokémon.",
+    "cost": 1000,
+    "teaches_move": "Gyro Ball"
+  },
+  "75": {
+    "name": "Tm75",
+    "api_name": "tm75",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "A frenetic dance to uplift the fighting spirit. It sharply raises the user’s Attack stat.",
+    "effect": "Teaches Swords Dance to a compatible Pokémon.",
+    "cost": 1000,
+    "teaches_move": "Swords Dance"
+  },
+  "76": {
+    "name": "Tm76",
+    "api_name": "tm76",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "The user lays a trap of levitating stones around the foe. The trap hurts foes that switch into battle.",
+    "effect": "Teaches Struggle Bug to a compatible Pokémon. (Gen IV: Stealth Rock)",
+    "cost": 10000,
+    "teaches_move": "Stealth Rock"
+  },
+  "77": {
+    "name": "Tm77",
+    "api_name": "tm77",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "The user hypnotizes itself into copying any stat change made by the foe.",
+    "effect": "Teaches Psych Up to a compatible Pokémon.",
+    "cost": 1000,
+    "teaches_move": "Psych Up"
+  },
+  "78": {
+    "name": "Tm78",
+    "api_name": "tm78",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "If it is the opposite gender of the user, the foe is charmed into sharply lowering its Sp. Atk stat.",
+    "effect": "Teaches Bulldoze to a compatible Pokémon. (Gen IV: Captivate)",
+    "cost": 1000,
+    "teaches_move": "Captivate"
+  },
+  "79": {
+    "name": "Tm79",
+    "api_name": "tm79",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "The user releases a horrible aura imbued with dark thoughts. It may also make the target flinch.",
+    "effect": "Teaches Frost Breath to a compatible Pokémon. (Gen IV: Dark Pulse)",
+    "cost": 1000,
+    "teaches_move": "Dark Pulse"
+  },
+  "80": {
+    "name": "Tm80",
+    "api_name": "tm80",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "Large boulders are hurled at the foe to inflict damage. It may also make the target flinch.",
+    "effect": "Teaches Rock Slide to a compatible Pokémon.",
+    "cost": 1000,
+    "teaches_move": "Rock Slide"
+  },
+  "81": {
+    "name": "Tm81",
+    "api_name": "tm81",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "The user slashes at the foe by crossing its scythes or claws as if they were a pair of scissors.",
+    "effect": "Teaches X-Scissor to a compatible Pokémon.",
+    "cost": 1000,
+    "teaches_move": "X Scissor"
+  },
+  "82": {
+    "name": "Tm82",
+    "api_name": "tm82",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "While it is asleep, the user randomly uses one of the moves it knows.",
+    "effect": "Teaches Dragon Tail to a compatible Pokémon. (Gen IV: Sleep Talk)",
+    "cost": 1000,
+    "teaches_move": "Sleep Talk"
+  },
+  "83": {
+    "name": "Tm83",
+    "api_name": "tm83",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "The user draws power from the Berry it is holding to attack. The Berry determines its type and power.",
+    "effect": "Teaches Work Up to a compatible Pokémon. (Gen IV: Natural Gift)",
+    "cost": 100000,
+    "teaches_move": "Natural Gift"
+  },
+  "84": {
+    "name": "Tm84",
+    "api_name": "tm84",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "The foe is stabbed with a tentacle or arm seeped with poison. It may also poison the foe.",
+    "effect": "Teaches Poison Jab to a compatible Pokémon.",
+    "cost": 1000,
+    "teaches_move": "Poison Jab"
+  },
+  "85": {
+    "name": "Tm85",
+    "api_name": "tm85",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "An attack that works only on a sleeping foe. It absorbs half the damage caused to heal the user’s HP.",
+    "effect": "Teaches Dream Eater to a compatible Pokémon.",
+    "cost": 1000,
+    "teaches_move": "Dream Eater"
+  },
+  "86": {
+    "name": "Tm86",
+    "api_name": "tm86",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "The user snares the foe with grass and trips it. The heavier the foe, the greater the damage.",
+    "effect": "Teaches Grass Knot to a compatible Pokémon.",
+    "cost": 1000,
+    "teaches_move": "Grass Knot"
+  },
+  "87": {
+    "name": "Tm87",
+    "api_name": "tm87",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "The user enrages the foe into confusion. However, it also sharply raises the foe’s Attack stat.",
+    "effect": "Teaches Swagger to a compatible Pokémon.",
+    "cost": 1000,
+    "teaches_move": "Swagger"
+  },
+  "88": {
+    "name": "Tm88",
+    "api_name": "tm88",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "The user pecks the foe. If the foe is holding a Berry, the user plucks it and gains its effect.",
+    "effect": "Teaches Pluck to a compatible Pokémon.",
+    "cost": 20000,
+    "teaches_move": "Pluck"
+  },
+  "89": {
+    "name": "Tm89",
+    "api_name": "tm89",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "After making its attack, the user rushes back to switch places with a party Pokémon in waiting.",
+    "effect": "Teaches U-turn to a compatible Pokémon.",
+    "cost": 20000,
+    "teaches_move": "U Turn"
+  },
+  "90": {
+    "name": "Tm90",
+    "api_name": "tm90",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "The user makes a copy of itself using some of its HP. The copy serves as the user’s decoy.",
+    "effect": "Teaches Substitute to a compatible Pokémon.",
+    "cost": 20000,
+    "teaches_move": "Substitute"
+  },
+  "91": {
+    "name": "Tm91",
+    "api_name": "tm91",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "The user gathers all its light energy and releases it in one shot. It may also lower the foe’s Sp. Def stat.",
+    "effect": "Teaches Flash Cannon to a compatible Pokémon.",
+    "cost": 20000,
+    "teaches_move": "Flash Cannon"
+  },
+  "92": {
+    "name": "Tm92",
+    "api_name": "tm92",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/tm-normal.png",
+    "flavor_text": "The user creates a bizarre space in which slower Pokémon get to move first for five turns.",
+    "effect": "Teaches Trick Room to a compatible Pokémon.",
+    "cost": 100000,
+    "teaches_move": "Trick Room"
+  },
+  "93": {
+    "name": "Hm01",
+    "api_name": "hm01",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/hm-normal.png",
+    "flavor_text": "Attacks the foe with sharp blades or claws.",
+    "effect": "Teaches Cut to a compatible Pokémon.",
+    "cost": 0,
+    "teaches_move": "Cut"
+  },
+  "94": {
+    "name": "Hm02",
+    "api_name": "hm02",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/hm-normal.png",
+    "flavor_text": "Flies up on the first turn, then attacks next turn.",
+    "effect": "Teaches Fly to a compatible Pokémon.",
+    "cost": 0,
+    "teaches_move": "Fly"
+  },
+  "95": {
+    "name": "Hm03",
+    "api_name": "hm03",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/hm-normal.png",
+    "flavor_text": "Creates a huge wave, then crashes it down on the foe.",
+    "effect": "Teaches Surf to a compatible Pokémon.",
+    "cost": 0,
+    "teaches_move": "Surf"
+  },
+  "96": {
+    "name": "Hm04",
+    "api_name": "hm04",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/hm-normal.png",
+    "flavor_text": "Builds enormous power, then slams the foe.",
+    "effect": "Teaches Strength to a compatible Pokémon.",
+    "cost": 0,
+    "teaches_move": "Strength"
+  },
+  "97": {
+    "name": "Hm05",
+    "api_name": "hm05",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/hm-normal.png",
+    "flavor_text": "Looses a powerful blast of light that reduces accuracy.",
+    "effect": "Teaches Waterfall to a compatible Pokémon. (HS: Whirlpool DPP: Defog Gen III & II & I: Flash)",
+    "cost": 0,
+    "teaches_move": "Flash"
+  },
+  "98": {
+    "name": "Hm06",
+    "api_name": "hm06",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/hm-normal.png",
+    "flavor_text": "A rock-crushingly tough attack that may lower DEFENSE.",
+    "effect": "Teaches Dive to a compatible Pokémon. (Gen IV & III: Rock Smash Gen II: Whirlpool)",
+    "cost": 0,
+    "teaches_move": "Whirlpool"
+  },
+  "99": {
+    "name": "Hm07",
+    "api_name": "hm07",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/hm-normal.png",
+    "flavor_text": "Attacks the foe with enough power to climb waterfalls.",
+    "effect": "Teaches a move to a compatible Pokémon. (Gen IV & III & II: Waterfall)",
+    "cost": 0,
+    "teaches_move": "Waterfall"
+  },
+  "100": {
+    "name": "Hm08",
+    "api_name": "hm08",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/hm-normal.png",
+    "flavor_text": "Dives underwater the 1st turn, then attacks next turn.",
+    "effect": "Teaches a move to a compatible Pokémon. (Gen IV: Rock Climb Gen III: Dive)",
+    "cost": 0,
+    "teaches_move": "Dive"
+  }
+}

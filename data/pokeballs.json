@@ -1,0 +1,306 @@
+{
+  "1": {
+    "name": "Master Ball",
+    "api_name": "master-ball",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/master-ball.png",
+    "flavor_text": "The best BALL that catches a POKéMON without fail.",
+    "effect": "Catches a wild Pokémon every time.",
+    "cost": 0
+  },
+  "2": {
+    "name": "Ultra Ball",
+    "api_name": "ultra-ball",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/ultra-ball.png",
+    "flavor_text": "A better BALL with a higher catch rate than a GREAT BALL.",
+    "effect": "Tries to catch a wild Pokémon.  Success rate is 2×.",
+    "cost": 800
+  },
+  "3": {
+    "name": "Great Ball",
+    "api_name": "great-ball",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/great-ball.png",
+    "flavor_text": "A good BALL with a higher catch rate than a POKé BALL.",
+    "effect": "Tries to catch a wild Pokémon.  Success rate is 1.5×.",
+    "cost": 600
+  },
+  "4": {
+    "name": "Poke Ball",
+    "api_name": "poke-ball",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png",
+    "flavor_text": "A tool used for catching wild POKéMON.",
+    "effect": "Tries to catch a wild Pokémon.",
+    "cost": 200
+  },
+  "5": {
+    "name": "Safari Ball",
+    "api_name": "safari-ball",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/safari-ball.png",
+    "flavor_text": "A special BALL that is used only in the SAFARI ZONE.",
+    "effect": "Tries to catch a wild Pokémon in the Great Marsh or Safari Zone.  Success rate is 1.5×.",
+    "cost": 0
+  },
+  "6": {
+    "name": "Park Ball",
+    "api_name": "park-ball",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/park-ball.png",
+    "flavor_text": "A special Poké Ball for the Pal Park.",
+    "effect": "Catches Pokémon in the Pal Park every time.",
+    "cost": 0
+  },
+  "7": {
+    "name": "Sport Ball",
+    "api_name": "sport-ball",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/sport-ball.png",
+    "flavor_text": "A special Poké Ball for the Bug-Catching Contest.",
+    "effect": "Tries to catch a Pokémon in the Bug-Catching contest in National Park. (Gen II: Park Ball)",
+    "cost": 300
+  },
+  "8": {
+    "name": "Lastrange Ball",
+    "api_name": "lastrange-ball",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/lastrange-ball.png",
+    "flavor_text": null,
+    "effect": null,
+    "cost": 0
+  },
+  "9": {
+    "name": "Lapoke Ball",
+    "api_name": "lapoke-ball",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/lapoke-ball.png",
+    "flavor_text": null,
+    "effect": null,
+    "cost": 0
+  },
+  "10": {
+    "name": "Lagreat Ball",
+    "api_name": "lagreat-ball",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/lagreat-ball.png",
+    "flavor_text": null,
+    "effect": null,
+    "cost": 0
+  },
+  "11": {
+    "name": "Laultra Ball",
+    "api_name": "laultra-ball",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/laultra-ball.png",
+    "flavor_text": null,
+    "effect": null,
+    "cost": 0
+  },
+  "12": {
+    "name": "Laheavy Ball",
+    "api_name": "laheavy-ball",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/laheavy-ball.png",
+    "flavor_text": "Doesn't fly far, but is more effective if the Pokémon hasn't noticed the player.",
+    "effect": null,
+    "cost": 0
+  },
+  "13": {
+    "name": "Laleaden Ball",
+    "api_name": "laleaden-ball",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/laleaden-ball.png",
+    "flavor_text": "Upgraded version of the Heavy Ball. Doesn't fly far, but is more effective if the Pokémon hasn't noticed the player.",
+    "effect": null,
+    "cost": 0
+  },
+  "14": {
+    "name": "Lagigaton Ball",
+    "api_name": "lagigaton-ball",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/lagigaton-ball.png",
+    "flavor_text": "Upgraded version of the Leaden Ball. Doesn't fly far, but is more effective if the Pokémon hasn't noticed the player.",
+    "effect": null,
+    "cost": 0
+  },
+  "15": {
+    "name": "Lafeather Ball",
+    "api_name": "lafeather-ball",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/lafeather-ball.png",
+    "flavor_text": "Can be thrown further than a regular Poké Ball. Is more effective for catching Pokémon that fly high in the air.",
+    "effect": null,
+    "cost": 0
+  },
+  "16": {
+    "name": "Lawing Ball",
+    "api_name": "lawing-ball",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/lawing-ball.png",
+    "flavor_text": "Can be thrown further than a Feather Ball. Is more effective for catching Pokémon that fly high in the air.",
+    "effect": null,
+    "cost": 0
+  },
+  "17": {
+    "name": "Lajet Ball",
+    "api_name": "lajet-ball",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/lajet-ball.png",
+    "flavor_text": "Can be thrown further than a Wing Ball. Is more effective for catching Pokémon that fly high in the air.",
+    "effect": null,
+    "cost": 0
+  },
+  "18": {
+    "name": "Laorigin Ball",
+    "api_name": "laorigin-ball",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/laorigin-ball.png",
+    "flavor_text": null,
+    "effect": null,
+    "cost": 0
+  },
+  "19": {
+    "name": "Net Ball",
+    "api_name": "net-ball",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/net-ball.png",
+    "flavor_text": "A BALL that works well on WATER- and BUG-type POKéMON.",
+    "effect": "Tries to catch a wild Pokémon.  Success rate is 3× for water and bug Pokémon.",
+    "cost": 1000
+  },
+  "20": {
+    "name": "Dive Ball",
+    "api_name": "dive-ball",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/dive-ball.png",
+    "flavor_text": "A BALL that works better on POKéMON on the ocean floor.",
+    "effect": "Tries to catch a wild Pokémon. Success rate is 3.5× when underwater, fishing, or surfing.",
+    "cost": 1000
+  },
+  "21": {
+    "name": "Nest Ball",
+    "api_name": "nest-ball",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/nest-ball.png",
+    "flavor_text": "A BALL that works better on weaker POKéMON.",
+    "effect": "Tries to catch a wild Pokémon.  Success rate is 3.9× for level 1 Pokémon, and drops steadily to 1× at level 30.",
+    "cost": 1000
+  },
+  "22": {
+    "name": "Repeat Ball",
+    "api_name": "repeat-ball",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/repeat-ball.png",
+    "flavor_text": "A BALL that works better on POKéMON caught before.",
+    "effect": "Tries to catch a wild Pokémon.  Success rate is 3× for previously-caught Pokémon.",
+    "cost": 1000
+  },
+  "23": {
+    "name": "Timer Ball",
+    "api_name": "timer-ball",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/timer-ball.png",
+    "flavor_text": "More effective as more turns are taken in battle.",
+    "effect": "Tries to catch a wild Pokémon. Success rate increases by 0.1× (Gen V: 0.3×) every turn, to a max of 4×.",
+    "cost": 1000
+  },
+  "24": {
+    "name": "Luxury Ball",
+    "api_name": "luxury-ball",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/luxury-ball.png",
+    "flavor_text": "A cozy BALL that makes POKéMON more friendly.",
+    "effect": "Tries to catch a wild Pokémon.  Caught Pokémon start with 200 happiness.",
+    "cost": 3000
+  },
+  "25": {
+    "name": "Premier Ball",
+    "api_name": "premier-ball",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/premier-ball.png",
+    "flavor_text": "A rare BALL made in commemoration of some event.",
+    "effect": "Tries to catch a wild Pokémon.",
+    "cost": 20
+  },
+  "26": {
+    "name": "Dusk Ball",
+    "api_name": "dusk-ball",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/dusk-ball.png",
+    "flavor_text": "A somewhat different Poké Ball that makes it easier to catch wild Pokémon at night or in dark places like caves.",
+    "effect": "Tries to catch a wild Pokémon.  Success rate is 3.5× at night and in caves.",
+    "cost": 1000
+  },
+  "27": {
+    "name": "Heal Ball",
+    "api_name": "heal-ball",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/heal-ball.png",
+    "flavor_text": "A remedial Poké Ball that restores the caught Pokémon’s HP and eliminates any status problem.",
+    "effect": "Tries to catch a wild Pokémon.  Caught Pokémon are immediately healed.",
+    "cost": 300
+  },
+  "28": {
+    "name": "Quick Ball",
+    "api_name": "quick-ball",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/quick-ball.png",
+    "flavor_text": "A somewhat different Poké Ball that provides a better catch rate if it is used at the start of a wild encounter.",
+    "effect": "Tries to catch a wild Pokémon. Success rate is 4× (Gen V: 5×), but only on the first turn.",
+    "cost": 1000
+  },
+  "29": {
+    "name": "Cherish Ball",
+    "api_name": "cherish-ball",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/cherish-ball.png",
+    "flavor_text": "A quite rare Poké Ball that has been specially crafted to commemorate an occasion of some sort.",
+    "effect": "Tries to catch a wild Pokémon.",
+    "cost": 0
+  },
+  "30": {
+    "name": "Dream Ball",
+    "api_name": "dream-ball",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/dream-ball.png",
+    "flavor_text": "A special Poké Ball that appears out of nowhere in a bag at the Entree Forest. It can catch any Pokémon.",
+    "effect": "Catches Pokémon found in the Dream World.",
+    "cost": 0
+  },
+  "31": {
+    "name": "Beast Ball",
+    "api_name": "beast-ball",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/beast-ball.png",
+    "flavor_text": "A special Poké Ball designed to catch Ultra Beasts. It has a low success rate for catching others.",
+    "effect": "Tries to catch a wild Pokémon.  Success rate is 5× for Ultra Beasts and 0.1× for all other Pokémon.",
+    "cost": 0
+  },
+  "32": {
+    "name": "Lure Ball",
+    "api_name": "lure-ball",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/lure-ball.png",
+    "flavor_text": "A Poké Ball for catching Pokémon hooked by a Rod when fishing.",
+    "effect": "3× effectiveness while fishing. Made from Blu Apricorn.",
+    "cost": 0
+  },
+  "33": {
+    "name": "Level Ball",
+    "api_name": "level-ball",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/level-ball.png",
+    "flavor_text": "A Poké Ball for catching Pokémon that are a lower level than your own.",
+    "effect": "Success rate based off of fraction target Pokémon is of user’s Pokémon. Made from Red Apricorn.",
+    "cost": 0
+  },
+  "34": {
+    "name": "Moon Ball",
+    "api_name": "moon-ball",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/moon-ball.png",
+    "flavor_text": "A Poké Ball for catching Pokémon that evolve using the Moon Stone.",
+    "effect": "4× effectiveness on familes of Pokémon with a Moon Stone evolution. Made from Ylw Apricorn.",
+    "cost": 0
+  },
+  "35": {
+    "name": "Heavy Ball",
+    "api_name": "heavy-ball",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/heavy-ball.png",
+    "flavor_text": "A Poké Ball for catching very heavy Pokémon.",
+    "effect": "Has flat bonus or penalty to catch rate depending on weight class of target. Made from Blk Apricorn.",
+    "cost": 0
+  },
+  "36": {
+    "name": "Fast Ball",
+    "api_name": "fast-ball",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/fast-ball.png",
+    "flavor_text": "A Poké Ball that makes it easier to catch fast Pokémon.",
+    "effect": "4× effectiveness on Pokémon with 100 or greater base speed. (Gen II: Roaming or Fleeing Pokémon). Made from Wht Apricorn.",
+    "cost": 0
+  },
+  "37": {
+    "name": "Friend Ball",
+    "api_name": "friend-ball",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/friend-ball.png",
+    "flavor_text": "A Poké Ball that makes caught Pokémon more friendly.",
+    "effect": "Caught Pokémon start with 200 happiness. Made from Grn Apricorn.",
+    "cost": 0
+  },
+  "38": {
+    "name": "Love Ball",
+    "api_name": "love-ball",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/love-ball.png",
+    "flavor_text": "Poké Ball for catching Pokémon that are the opposite gender of your Pokémon.",
+    "effect": "8× effectiveness on opposite sex, same species targets of the Active Pokémon. Made from Pnk Apricorn.",
+    "cost": 0
+  }
+}

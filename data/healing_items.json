@@ -1,0 +1,322 @@
+{
+  "1": {
+    "name": "Potion",
+    "api_name": "potion",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/potion.png",
+    "flavor_text": "Restores the HP of a POKéMON by 20 points.",
+    "effect": "Restores 20 HP.",
+    "cost": 200
+  },
+  "2": {
+    "name": "Full Restore",
+    "api_name": "full-restore",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/full-restore.png",
+    "flavor_text": "Fully restores the HP and status of a POKéMON.",
+    "effect": "Restores HP to full and cures any status ailment and confusion.",
+    "cost": 3000
+  },
+  "3": {
+    "name": "Max Potion",
+    "api_name": "max-potion",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/max-potion.png",
+    "flavor_text": "Fully restores the HP of a POKéMON.",
+    "effect": "Restores HP to full.",
+    "cost": 2500
+  },
+  "4": {
+    "name": "Hyper Potion",
+    "api_name": "hyper-potion",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/hyper-potion.png",
+    "flavor_text": "Restores the HP of a POKéMON by 200 points.",
+    "effect": "Restores 200 HP.",
+    "cost": 1500
+  },
+  "5": {
+    "name": "Super Potion",
+    "api_name": "super-potion",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/super-potion.png",
+    "flavor_text": "Restores the HP of a POKéMON by 50 points.",
+    "effect": "Restores 50 HP.",
+    "cost": 700
+  },
+  "6": {
+    "name": "Fresh Water",
+    "api_name": "fresh-water",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/fresh-water.png",
+    "flavor_text": "A mineral water that restores HP by 50 points.",
+    "effect": "Restores 50 HP.",
+    "cost": 200
+  },
+  "7": {
+    "name": "Soda Pop",
+    "api_name": "soda-pop",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/soda-pop.png",
+    "flavor_text": "A fizzy soda drink that restores HP by 60 points.",
+    "effect": "Restores 60 HP.",
+    "cost": 300
+  },
+  "8": {
+    "name": "Lemonade",
+    "api_name": "lemonade",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/lemonade.png",
+    "flavor_text": "A very sweet drink that restores HP by 80 points.",
+    "effect": "Restores 80 HP.",
+    "cost": 400
+  },
+  "9": {
+    "name": "Moomoo Milk",
+    "api_name": "moomoo-milk",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/moomoo-milk.png",
+    "flavor_text": "A nutritious milk that restores HP by 100 points.",
+    "effect": "Restores 100 HP.",
+    "cost": 600
+  },
+  "10": {
+    "name": "Energy Powder",
+    "api_name": "energy-powder",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/energy-powder.png",
+    "flavor_text": "A bitter powder that restores HP by 50 points.",
+    "effect": "Restores 50 HP, but lowers happiness.",
+    "cost": 500
+  },
+  "11": {
+    "name": "Energy Root",
+    "api_name": "energy-root",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/energy-root.png",
+    "flavor_text": "A bitter root that restores HP by 200 points.",
+    "effect": "Restores 200 HP, but lowers happiness.",
+    "cost": 1200
+  },
+  "12": {
+    "name": "Berry Juice",
+    "api_name": "berry-juice",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/berry-juice.png",
+    "flavor_text": "A 100% pure juice that restores HP by 20 points.",
+    "effect": "Restores 20 HP.",
+    "cost": 200
+  },
+  "13": {
+    "name": "Sweet Heart",
+    "api_name": "sweet-heart",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/sweet-heart.png",
+    "flavor_text": "Very sweet chocolate.   It restores the HP of one Pokémon by only 20 points.",
+    "effect": "Restores 20 HP.",
+    "cost": 3000
+  },
+  "14": {
+    "name": "Cheri Berry",
+    "api_name": "cheri-berry",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/cheri-berry.png",
+    "flavor_text": "A hold item that heals paralysis in battle.",
+    "effect": "Held: Consumed when paralyzed to cure paralysis.",
+    "cost": 80
+  },
+  "15": {
+    "name": "Chesto Berry",
+    "api_name": "chesto-berry",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/chesto-berry.png",
+    "flavor_text": "A hold item that awakens POKéMON in battle.",
+    "effect": "Held: Consumed when asleep to cure sleep.",
+    "cost": 80
+  },
+  "16": {
+    "name": "Pecha Berry",
+    "api_name": "pecha-berry",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/pecha-berry.png",
+    "flavor_text": "A hold item that heals poisoning in battle.",
+    "effect": "Held: Consumed when poisoned to cure poison.",
+    "cost": 80
+  },
+  "17": {
+    "name": "Rawst Berry",
+    "api_name": "rawst-berry",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/rawst-berry.png",
+    "flavor_text": "A hold item that heals a burn in battle.",
+    "effect": "Held: Consumed when burned to cure a burn.",
+    "cost": 80
+  },
+  "18": {
+    "name": "Aspear Berry",
+    "api_name": "aspear-berry",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/aspear-berry.png",
+    "flavor_text": "A hold item that defrosts POKéMON in battle.",
+    "effect": "Held: Consumed when frozen to cure frozen.",
+    "cost": 80
+  },
+  "19": {
+    "name": "Leppa Berry",
+    "api_name": "leppa-berry",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/leppa-berry.png",
+    "flavor_text": "A hold item that restores 10 PP in battle.",
+    "effect": "Held: Consumed when a move runs out of PP to restore its PP by 10.",
+    "cost": 80
+  },
+  "20": {
+    "name": "Oran Berry",
+    "api_name": "oran-berry",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/oran-berry.png",
+    "flavor_text": "A hold item that restores 10 HP in battle.",
+    "effect": "Held: Consumed at 1/2 max HP to recover 10 HP.",
+    "cost": 80
+  },
+  "21": {
+    "name": "Persim Berry",
+    "api_name": "persim-berry",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/persim-berry.png",
+    "flavor_text": "A hold item that heals confusion in battle.",
+    "effect": "Held: Consumed when confused to cure confusion.",
+    "cost": 80
+  },
+  "22": {
+    "name": "Lum Berry",
+    "api_name": "lum-berry",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/lum-berry.png",
+    "flavor_text": "A hold item that heals status in battle.",
+    "effect": "Held: Consumed to cure any status condition or confusion.",
+    "cost": 80
+  },
+  "23": {
+    "name": "Sitrus Berry",
+    "api_name": "sitrus-berry",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/sitrus-berry.png",
+    "flavor_text": "A hold item that restores 30 HP in battle.",
+    "effect": "Held: Consumed at 1/2 max HP to recover 1/4 max HP.",
+    "cost": 80
+  },
+  "24": {
+    "name": "Revive",
+    "api_name": "revive",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/revive.png",
+    "flavor_text": "Revives a fainted POKéMON with half its HP.",
+    "effect": "Revives with half HP.",
+    "cost": 2000
+  },
+  "25": {
+    "name": "Max Revive",
+    "api_name": "max-revive",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/max-revive.png",
+    "flavor_text": "Revives a fainted POKéMON with all its HP.",
+    "effect": "Revives with full HP.",
+    "cost": 4000
+  },
+  "26": {
+    "name": "Revival Herb",
+    "api_name": "revival-herb",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/revival-herb.png",
+    "flavor_text": "A very bitter herb that revives a fainted POKéMON.",
+    "effect": "Revives with full HP, but lowers happiness.",
+    "cost": 2800
+  },
+  "27": {
+    "name": "Sacred Ash",
+    "api_name": "sacred-ash",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/sacred-ash.png",
+    "flavor_text": "Fully revives and restores all fainted POKéMON.",
+    "effect": "Revives all fainted Pokémon with full HP.",
+    "cost": 50000
+  },
+  "28": {
+    "name": "Antidote",
+    "api_name": "antidote",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/antidote.png",
+    "flavor_text": "Heals a poisoned POKéMON.",
+    "effect": "Cures poison.",
+    "cost": 200
+  },
+  "29": {
+    "name": "Burn Heal",
+    "api_name": "burn-heal",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/burn-heal.png",
+    "flavor_text": "Heals POKéMON of a burn.",
+    "effect": "Cures a burn.",
+    "cost": 200
+  },
+  "30": {
+    "name": "Ice Heal",
+    "api_name": "ice-heal",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/ice-heal.png",
+    "flavor_text": "Defrosts a frozen POKéMON.",
+    "effect": "Cures freezing.",
+    "cost": 200
+  },
+  "31": {
+    "name": "Awakening",
+    "api_name": "awakening",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/awakening.png",
+    "flavor_text": "Awakens a sleeping POKéMON.",
+    "effect": "Cures sleep.",
+    "cost": 200
+  },
+  "32": {
+    "name": "Paralyze Heal",
+    "api_name": "paralyze-heal",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/paralyze-heal.png",
+    "flavor_text": "Heals a paralyzed POKéMON.",
+    "effect": "Cures paralysis.",
+    "cost": 200
+  },
+  "33": {
+    "name": "Full Heal",
+    "api_name": "full-heal",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/full-heal.png",
+    "flavor_text": "Heals all the status problems of one POKéMON.",
+    "effect": "Cures any status ailment and confusion.",
+    "cost": 400
+  },
+  "34": {
+    "name": "Heal Powder",
+    "api_name": "heal-powder",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/heal-powder.png",
+    "flavor_text": "A bitter powder that heals all status problems.",
+    "effect": "Cures any status ailment, but lowers happiness.",
+    "cost": 300
+  },
+  "35": {
+    "name": "Lava Cookie",
+    "api_name": "lava-cookie",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/lava-cookie.png",
+    "flavor_text": "A local specialty that heals all status problems.",
+    "effect": "Cures any status ailment and confusion.",
+    "cost": 350
+  },
+  "36": {
+    "name": "Old Gateau",
+    "api_name": "old-gateau",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/old-gateau.png",
+    "flavor_text": "Old Chateau’s hidden specialty. It heals all the status problems of a single Pokémon.",
+    "effect": "Cures any status ailment and confusion.",
+    "cost": 350
+  },
+  "37": {
+    "name": "Casteliacone",
+    "api_name": "casteliacone",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/casteliacone.png",
+    "flavor_text": "Castelia City’s specialty, soft-serve ice cream. It heals all the status problems of a single Pokémon.",
+    "effect": "Cures any status ailment and confusion.",
+    "cost": 350
+  },
+  "38": {
+    "name": "Lumiose Galette",
+    "api_name": "lumiose-galette",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/lumiose-galette.png",
+    "flavor_text": "A popular treat in Lumiose City. It can be used once to heal all the status conditions of a Pokémon.",
+    "effect": "Cures all major status ailments and confusion.",
+    "cost": 350
+  },
+  "39": {
+    "name": "Shalour Sable",
+    "api_name": "shalour-sable",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/shalour-sable.png",
+    "flavor_text": "Shalour City’s famous shortbread. It can be used once to heal all the status conditions of a Pokémon.",
+    "effect": "Cures any major status ailment and confusion.",
+    "cost": 350
+  },
+  "40": {
+    "name": "Big Malasada",
+    "api_name": "big-malasada",
+    "image_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/big-malasada.png",
+    "flavor_text": "The Alola region’s local specialty—fried bread. It can be used once to heal all the status conditions of a Pokémon.",
+    "effect": "Cures major status ailments and confusion.",
+    "cost": 350
+  }
+}
